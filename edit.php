@@ -5,6 +5,7 @@
 	//ff3498
 	//ff78b0
 	//1b9596
+	//7be6b4
 
 		// pass in some info;
 	require("common.php");
@@ -106,9 +107,9 @@
     		while($row = mysqli_fetch_row($result)) {
         		echo "<div class='row'>
         <div class='col s12 m12'>
-          <div class='card blue-grey darken-1' >
-            <div class='card-content white-text'>
-              <span class='card-title'>$row[1]</span>
+          <div class='card darken-3'style='background-color: #7be6b4' >
+            <div class='card-content text'>
+              <span class='card-title' style = 'font-weight: 400; color : #b60046;'>$row[1]</span>
               <p>$row[2]</p>
             </div>
             <div class='card-action'>
@@ -119,7 +120,7 @@
 					<p>Are you sure you want to delete this row in the data base, once you do, you cannot return</p>
 				</div>
 				<div class='modal-footer'>
-				<a href=".$_SERVER['PHP_SELF']."?id=".$row[0]." class=' btn modal-action modal-close waves-effect waves-light red'>Delete</a>
+				<a href=".$_SERVER['PHP_SELF']."?id=".$row[0]." style='background-color: #b60046;' class=' btn modal-action modal-close waves-effect waves-light'>Delete</a>
 				<a class = 'btn-flat modal-action modal-close waves-effect waves-green'> Cancel</a>
 				</div>
 			  </div>
