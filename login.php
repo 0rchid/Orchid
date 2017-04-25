@@ -23,10 +23,10 @@
 <body>
   <nav>
     <div class="pink nav-wrapper">
-      <a href="#" class="brand-logo">Twittapp</a>
+      <a href="#" class="brand-logo">Orchid</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
 
-        
+
       </ul>
     </div>
   </nav>
