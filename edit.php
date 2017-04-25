@@ -99,27 +99,31 @@
 		if (mysqli_num_rows($result) > 0) {
 
     		// print them one after another
-    		echo "<table class = 'highlight bordered centered' cellpadding=10 border=1>";
     		while($row = mysqli_fetch_row($result)) {
-        		echo "<tr>";
-						echo "<td>".$row[0]."</td>";
-        		echo "<td>" . $row[1]."</td>";
-        		echo "<td>".$row[2]."</td>";
-						echo "<td><a class = 'btn waves-effect waves-light red 'href='#modal1'>Delete</a></td>";
-						echo "	<div id='modal1' class='modal'>
-								<div class='modal-content'>
-									<h4>Are you sure?</h4>
-									<p>Are you sure you want to delete this row in the data base, once you do, you cannot return</p>
-								</div>
-								<div class='modal-footer'>
-									<a href=".$_SERVER['PHP_SELF']."?id=".$row[0]." class=' btn modal-action modal-close waves-effect waves-light red'>Delete</a>
-									<a class = 'btn-flat modal-action modal-close waves-effect waves-green'> Cancel</a>
-								</div>
-							</div>";
-        		echo "</tr>";
+        		echo "<div class='row'>
+        <div class='col s12 m12'>
+          <div class='card blue-grey darken-1'>
+            <div class='card-content white-text'>
+              <span class='card-title'>$row[1]</span>
+              <p>$row[2]</p>
+            </div>
+            <div class='card-action'>
+              	<a class = 'btn waves-effect waves-light red 'href='#modal1'>Delete</a>
+			  	<div id='modal1' class='modal'>
+				<div class='modal-content'>
+					<h4>Are you sure?</h4>
+					<p>Are you sure you want to delete this row in the data base, once you do, you cannot return</p>
+				</div>
+				<div class='modal-footer'>
+				<a href=".$_SERVER['PHP_SELF']."?id=".$row[0]." class=' btn modal-action modal-close waves-effect waves-light red'>Delete</a>
+				<a class = 'btn-flat modal-action modal-close waves-effect waves-green'> Cancel</a>
+				</div>
+			  </div>
+            </div>
+          </div>
+        </div>
+      </div>";
     		}
-		    	echo "</table>";
-
 		} else {
 
     		// print status message
@@ -167,8 +171,5 @@
 
 
     <!-- This is the HTML form that appears in the browser -->
-
-
-	</div>
 	</body>
 </html>
