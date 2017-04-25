@@ -1,6 +1,10 @@
 
 <html>
 <?php
+	//b60046
+	//ff3498
+	//ff78b0
+	//1b9596
 
 		// pass in some info;
 	require("common.php");
@@ -48,7 +52,7 @@
 </head>
 	<body>
 		<nav>
-	    <div class="nav-wrapper" style="background-color: #b60046;">
+	    <div class="nav-wrapper" style="background-color: #ff3498;">
 	      <a href="#" class="brand-logo">Orchid</a>
 	      <ul id="nav-mobile" class="right hide-on-med-and-down">
 
@@ -75,7 +79,7 @@
 					<label for = "animal">Animal<label>
 				</div>
 				<div class = "input-field col s2">
-					<button class = "btn waves-effect waves-light ">Submit</button>
+					<button class = "btn waves-effect waves-light " style="background-color: #1b9596;">Submit</button>
 				</div>
 	    </form>
 		</div>
@@ -102,13 +106,13 @@
     		while($row = mysqli_fetch_row($result)) {
         		echo "<div class='row'>
         <div class='col s12 m12'>
-          <div class='card blue-grey darken-1'>
+          <div class='card blue-grey darken-1' >
             <div class='card-content white-text'>
               <span class='card-title'>$row[1]</span>
               <p>$row[2]</p>
             </div>
             <div class='card-action'>
-              	<a class = 'btn waves-effect waves-light red 'href='#modal1'>Delete</a>
+              	<a class = 'btn waves-effect waves-light ' style='background-color: #b60046;' href='#modal1'>Delete</a>
 			  	<div id='modal1' class='modal'>
 				<div class='modal-content'>
 					<h4>Are you sure?</h4>
