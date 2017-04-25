@@ -48,7 +48,7 @@
 </head>
 	<body>
 		<nav>
-	    <div class="pink nav-wrapper">
+	    <div class="nav-wrapper" style="background-color: #b60046;">
 	      <a href="#" class="brand-logo">Orchid</a>
 	      <ul id="nav-mobile" class="right hide-on-med-and-down">
 
