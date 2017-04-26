@@ -52,21 +52,28 @@
 
 </head>
 	<body>
-		<nav>
+		<nav class = "nav-extended">
 	    <div class="nav-wrapper" style="background-color: #ff3498;">
-	      <a href="#" class="brand-logo">Orchid</a>
+
+
+				<img class = "brand-logo" style="display:inline;" src="logo.png">
 	      <ul id="nav-mobile" class="right hide-on-med-and-down">
-
 	        <li><a class = "dropdown-button pink-lighter" data-activates='dropdown1'><?php  echo $arr[2]; ?></a></li>
-
-
 	      </ul>
+				<br>
+				<div class="nav-content">
+	        <ul class="tabs tabs-transparent">
+	          <li class="tab right"><a class = "active  " href="#test1">Home</a></li>
+	          <li class="tab right "><a class="active " href="#test2">Profile </a></li>
+	        </ul>
+	      </div>
 	    </div>
 	  </nav>
 		<ul id='dropdown1' class='dropdown-content'>
     	<li><a href="">Profile</a></li>
     	<li><a href="logout.php">Logout</a></li>
   </ul>
+
 
 		<div class = "container">
 			<div class = "row">
