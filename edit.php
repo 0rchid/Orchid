@@ -1,5 +1,6 @@
 
 <html>
+
 <?php
 	//b60046
 	//ff3498
@@ -79,12 +80,12 @@
 			<div class = "row">
 			<form action="<?=$_SERVER['PHP_SELF']?>" method="post">
 				<div class = "input-field col s5">
-	    		<input id = "country" class = "validate" type="text" name="country">
-					<label for = "country">Country<label>
+	    		<input id = "user" class = "validate" type="text" name="user">
+					<label for = "user">user<label>
 				</div>
 				<div class = "input-field col s5">
-	    		<input id = "animal" class = "validate" type="text" name="animal">
-					<label for = "animal">Animal<label>
+	    		<input id = "content" class = "validate" type="text" name="content">
+					<label for = "content">content<label>
 				</div>
 				<div class = "input-field col s2">
 					<button class = "btn waves-effect waves-light " style="background-color: #1b9596;">Submit</button>
@@ -102,7 +103,7 @@
 		mysqli_select_db($connection, $dbname) or die ("Unable to select database!");
 
 		// create query
-		$query = "SELECT * FROM symbols";
+		$query = "SELECT * FROM posts";
 
 		// execute query
 		$result = mysqli_query($connection,$query) or die ("Error in query: $query. ".mysql_error());
@@ -117,7 +118,7 @@
           <div class='card darken-3'style='background-color: #7be6b4' >
             <div class='card-content text'>
               <span class='card-title' style = 'font-weight: 400; color : #b60046;'>$row[1]</span>
-              <p>$row[2]</p>
+              <p>$row[3]</p>
             </div>
             <div class='card-action'>
               	<a class = 'btn waves-effect waves-light ' style='background-color: #b60046;' href='#modal1'>Delete</a>
@@ -146,13 +147,13 @@
 		mysqli_free_result($connection,$result);
 
 		// set variable values to HTML form inputs
-		$country = $_POST['country'];
-    	$animal = $_POST['animal'];
+		$user = $_POST['user'];
+    	$content = $_POST['content'];
 
 		// check to see if user has entered anything
-		if ($animal != "") {
+		if ($content != "") {
 	 		// build SQL query
-			$query = "INSERT INTO symbols (country, animal) VALUES ('$country', '$animal')";
+			$query = "INSERT INTO posts (user, content) VALUES ('$user', '$content')";
 			// run the query
      		$result = mysqli_query($connection,$query) or die ("Error in query: $query. ".mysql_error());
 			// refresh the page to show new update
@@ -164,7 +165,7 @@
 
 			// create query to delete record
 			echo $_SERVER['PHP_SELF'];
-    		$query = "DELETE FROM symbols WHERE id = ".$_GET['id'];
+    		$query = "DELETE FROM posts WHERE id = ".$_GET['id'];
 
 			// run the query
      		$result = mysqli_query($connection,$query) or die ("Error in query: $query. ".mysql_error());
