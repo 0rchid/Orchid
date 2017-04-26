@@ -79,11 +79,8 @@
 		<div class = "container">
 			<div class = "row">
 			<form action="<?=$_SERVER['PHP_SELF']?>" method="post">
-				<div class = "input-field col s5">
-	    		<input id = "user" class = "validate" type="text" name="user">
-					<label for = "user">user<label>
-				</div>
-				<div class = "input-field col s5">
+
+				<div class = "input-field col m10">
 	    		<input id = "content" class = "validate" type="text" name="content">
 					<label for = "content">content<label>
 				</div>
@@ -121,22 +118,27 @@
               <p>$row[3]</p>
             </div>
             <div class='card-action'>
-              	<a class = 'btn waves-effect waves-light ' style='background-color: #b60046;' href='#modal1'>Delete</a>
-			  	<div id='modal1' class='modal'>
-				<div class='modal-content'>
-					<h4>Are you sure?</h4>
-					<p>Are you sure you want to delete this row in the data base, once you do, you cannot return</p>
+							<a class = 'btn waves-effect waves-light ' style='background-color: #b60046;' href='#modal1'>Delete</a>
+						</div>
+					</div>
 				</div>
-				<div class='modal-footer'>
-				<a href=".$_SERVER['PHP_SELF']."?id=".$row[0]." style='background-color: #b60046;' class=' btn modal-action modal-close waves-effect waves-light'>Delete</a>
-				<a class = 'btn-flat modal-action modal-close waves-effect waves-green'> Cancel</a>
-				</div>
-			  </div>
-            </div>
-          </div>
-        </div>
-      </div>";
+			</div>
+			";
+						if ($arr[2] = $row[1]){
+								echo "
+			  							<div id='modal1' class='modal'>
+												<div class='modal-content'>
+													<h4>Are you sure?</h4>
+													<p>Are you sure you want to delete this row in the data base, once you do, you cannot return</p>
+													</div>
+												<div class='modal-footer'>
+													<a href=".$_SERVER['PHP_SELF']."?id=".$row[0]." style='background-color: #b60046;' class=' btn modal-action modal-close waves-effect waves-light'>Delete</a>
+													<a class = 'btn-flat modal-action modal-close waves-effect waves-green'> Cancel</a>
+												</div>
+			  							</div>";
+										}
     		}
+
 		} else {
 
     		// print status message
@@ -147,7 +149,7 @@
 		mysqli_free_result($connection,$result);
 
 		// set variable values to HTML form inputs
-		$user = $_POST['user'];
+			$user = $arr[2];
     	$content = $_POST['content'];
 
 		// check to see if user has entered anything
