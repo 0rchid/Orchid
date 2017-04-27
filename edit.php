@@ -77,9 +77,8 @@
 			<li><a href="#modal1">Post</a></li>
 
   </ul>
-
-
-
+	</div>
+	
 
   <!-- Modal Structure -->
   <div id="modal1" class="modal">
@@ -105,6 +104,25 @@
 
 
 
+<div class="row">
+			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="col s12">
+				<div class="row">
+				<div class = "input-field s6">
+					<input id = "hashtagsearch" class = "validate" type="text" name="hashtagsearch">
+					<label for = "hashtagsearch">Search Hashtags<label>
+				</div>
+
+				<div class = "input-field col s6">
+					<button type="submit"class = "btn waves-effect waves-light" >Search</button>
+				</div>
+				</div>
+			</form>
+			</div>
+	<div class = "container">
+
+
+
+
 
 
 
@@ -124,6 +142,16 @@
 		$result = mysqli_query($connection,$query) or die ("Error in query: $query. ".mysql_error());
 
  		$user = $arr[2];
+
+		$hashtagsearch = $_POST['hashtagsearch'];
+
+		// check to see if user has entered anything
+		if ($hashtagsearch != "") {
+	 		// build SQL query
+			$query = "SELECT * FROM posts WHERE hashtag LIKE '%$hashtagsearch%'";
+			// run the query
+     	$result = mysqli_query($connection,$query) or die ("Error in query: $query. ".mysql_error());
+		}
 
 		// see if any rows were returned
 		if (mysqli_num_rows($result) > 0) {
@@ -202,12 +230,13 @@
 
 		}
 
+
 		// close connection
 		mysqli_close($connection);
 
 	?>
 
 
-    <!-- This is the HTML form that appears in the browser -->
+ </div>   <!-- This is the HTML form that appears in the browser -->
 	</body>
 </html>
