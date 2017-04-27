@@ -202,11 +202,12 @@
 		// set variable values to HTML form inputs
 
     	$content = $_POST['content'];
+			$hashtag = $_POST['hashtag'];
 
 		// check to see if user has entered anything
 		if ($content != "") {
 	 		// build SQL query
-			$query = "INSERT INTO posts (user, content) VALUES ('$user', '$content')";
+			$query = "INSERT INTO posts (user, hashtag, content) VALUES ('$user', '$hashtag', '$content')";
 			// run the query
      		$result = mysqli_query($connection,$query) or die ("Error in query: $query. ".mysql_error());
 			// refresh the page to show new update
