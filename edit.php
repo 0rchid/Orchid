@@ -105,6 +105,8 @@
 		// execute query
 		$result = mysqli_query($connection,$query) or die ("Error in query: $query. ".mysql_error());
 
+ 		$user = $arr[2];
+
 		// see if any rows were returned
 		if (mysqli_num_rows($result) > 0) {
 
@@ -118,14 +120,16 @@
               <p>$row[3]</p>
             </div>
             <div class='card-action'>
-							<a class = 'btn waves-effect waves-light ' style='background-color: #b60046;' href='#modal1'>Delete</a>
+							<a id = 'like' style='color: #b60046;' >Like</a>
 						</div>
 					</div>
 				</div>
 			</div>
 			";
-						if ($arr[2] = $row[1]){
+
 								echo "
+
+
 			  							<div id='modal1' class='modal'>
 												<div class='modal-content'>
 													<h4>Are you sure?</h4>
@@ -136,7 +140,8 @@
 													<a class = 'btn-flat modal-action modal-close waves-effect waves-green'> Cancel</a>
 												</div>
 			  							</div>";
-										}
+
+
     		}
 
 		} else {
@@ -149,7 +154,7 @@
 		mysqli_free_result($connection,$result);
 
 		// set variable values to HTML form inputs
-			$user = $arr[2];
+
     	$content = $_POST['content'];
 
 		// check to see if user has entered anything
