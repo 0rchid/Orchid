@@ -1,4 +1,3 @@
-
 <html>
 
 <?php
@@ -7,25 +6,19 @@
 	//ff78b0
 	//1b9596
 	//7be6b4
-
 		// pass in some info;
 	require("common.php");
-
 	if(empty($_SESSION['user'])) {
-
 		// If they are not, we redirect them to the login page.
 		$location = "http://" . $_SERVER['HTTP_HOST'] . "/login.php";
 		echo '<META HTTP-EQUIV="refresh" CONTENT="0;URL='.$location.'">';
 		//exit;
-
 				// Remember that this die statement is absolutely critical.  Without it,
 				// people can view your members-only content without logging in.
 				die("Redirecting to login.php");
 		}
-
 	// To access $_SESSION['user'] values put in an array, show user his username
 	$arr = array_values($_SESSION['user']);
-
 ?>
 
 <head>
@@ -78,7 +71,7 @@
 
   </ul>
 	</div>
-	
+
 
   <!-- Modal Structure -->
   <div id="modal1" class="modal">
@@ -128,23 +121,16 @@
 
 
 	<?php
-
 		// open connection
 		$connection = mysqli_connect($host, $username, $password) or die ("Unable to connect!");
-
 		// select database
 		mysqli_select_db($connection, $dbname) or die ("Unable to select database!");
-
 		// create query
 		$query = "SELECT * FROM posts";
-
 		// execute query
 		$result = mysqli_query($connection,$query) or die ("Error in query: $query. ".mysql_error());
-
  		$user = $arr[2];
-
 		$hashtagsearch = $_POST['hashtagsearch'];
-
 		// check to see if user has entered anything
 		if ($hashtagsearch != "") {
 	 		// build SQL query
@@ -152,10 +138,8 @@
 			// run the query
      	$result = mysqli_query($connection,$query) or die ("Error in query: $query. ".mysql_error());
 		}
-
 		// see if any rows were returned
 		if (mysqli_num_rows($result) > 0) {
-
     		// print them one after another
     		while($row = mysqli_fetch_row($result)) {
         		echo "<div class='row'>
@@ -172,10 +156,7 @@
 				</div>
 			</div>
 			";
-
 								//echo "
-
-
 			  						//	<div id='modal1' class='modal'>
 											//	<div class='modal-content'>
 											//		<h4>Are you sure?</h4>
@@ -186,23 +167,15 @@
 											//		<a class = 'btn-flat modal-action modal-close waves-effect waves-green'> Cancel</a>
 											//	</div>
 			  							//</div>";
-
-
     		}
-
 		} else {
-
     		// print status message
     		echo "No rows found!";
 		}
-
 		// free result set memory
 		mysqli_free_result($connection,$result);
-
 		// set variable values to HTML form inputs
-
     	$content = $_POST['content'];
-
 		// check to see if user has entered anything
 		if ($content != "") {
 	 		// build SQL query
@@ -212,28 +185,20 @@
 			// refresh the page to show new update
 	 		echo "<meta http-equiv='refresh' content='0'>";
 		}
-
 		// if DELETE pressed, set an id, if id is set then delete it from DB
 		if (isset($_GET['id'])) {
-
 			// create query to delete record
 			echo $_SERVER['PHP_SELF'];
     		$query = "DELETE FROM posts WHERE id = ".$_GET['id'];
-
 			// run the query
      		$result = mysqli_query($connection,$query) or die ("Error in query: $query. ".mysql_error());
-
 			// reset the url to remove id $_GET variable
 			$location = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
 			echo '<META HTTP-EQUIV="refresh" CONTENT="0;URL='.$location.'">';
 			exit;
-
 		}
-
-
 		// close connection
 		mysqli_close($connection);
-
 	?>
 
 
