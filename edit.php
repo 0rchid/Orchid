@@ -141,7 +141,7 @@
 		// execute query
 		$result = mysqli_query($connection,$query) or die ("Error in query: $query. ".mysql_error());
 
- 		$user = $arr[2];
+ 		$user = $arr[1];
 
 		$hashtagsearch = $_POST['hashtagsearch'];
 
