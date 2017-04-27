@@ -123,10 +123,13 @@
 	<?php
 		// open connection
 		$connection = mysqli_connect($host, $username, $password) or die ("Unable to connect!");
+
 		// select database
 		mysqli_select_db($connection, $dbname) or die ("Unable to select database!");
+		$hashtag = $_POST['hashtag'];
 		// create query
-		$query = "SELECT * FROM posts";
+		$query = "SELECT * FROM posts ORDER BY id DESC";
+
 		// execute query
 		$result = mysqli_query($connection,$query) or die ("Error in query: $query. ".mysql_error());
 
@@ -138,7 +141,7 @@
 		// check to see if user has entered anything
 		if ($hashtagsearch != "") {
 	 		// build SQL query
-			$query = "SELECT * FROM posts WHERE hashtag LIKE '%$hashtagsearch%'";
+			$query = "SELECT * FROM posts WHERE hashtag LIKE '%$hashtagsearch%' ORDER BY id DESC";
 			// run the query
      	$result = mysqli_query($connection,$query) or die ("Error in query: $query. ".mysql_error());
 		}
@@ -155,6 +158,7 @@
             </div>
             <div class='card-action'>
 							<a id = 'like' style='color: #b60046;' >Like</a>
+							<a class = 'right' style='color: #b60046;' >$row[2] </a>
 						</div>
 					</div>
 				</div>
@@ -180,7 +184,6 @@
 		mysqli_free_result($connection,$result);
 		// set variable values to HTML form inputs
     	$content = $_POST['content'];
-
 
 		// check to see if user has entered anything
 		if ($content != "") {
