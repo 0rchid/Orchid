@@ -87,11 +87,11 @@
       <h4>New Post</h4>
 			<form action="<?=$_SERVER['PHP_SELF']?>" method="post">
 
-				<div class = "input-field col m10">
+				<div class = "input-field">
 	    		<input id = "content" class = "validate" type="text" name="content">
 					<label for = "content">Content<label>
 				</div>
-				<div class = "input-field col s2">
+				<div class = "input-field">
 					<input id = "hashtag" class = "validate" type="text" name="hashtag">
 					<label for = "hashtag">Hashtag<label>
 				</div>
