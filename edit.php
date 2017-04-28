@@ -46,6 +46,7 @@
 
 </head>
 	<body>
+		<div class = "navbar-fixed">
 		<nav class = "nav-extended">
 	    <div class="nav-wrapper" style="background-color: #ff3498;">
 
@@ -63,6 +64,7 @@
 	      </div>
 	    </div>
 	  </nav>
+	</div>
 		<ul id='dropdown1' class='dropdown-content'>
     	<li><a href="">Profile</a></li>
     	<li><a href="logout.php">Logout</a></li>
@@ -94,6 +96,9 @@
     </div>
 		</form>
   </div>
+	<br>
+	<br>
+	<br>
 
 
 
@@ -105,9 +110,7 @@
 					<label for = "hashtagsearch">Search Hashtags<label>
 				</div>
 
-				<div class = "input-field col s6">
-					<button type="submit"class = "btn waves-effect waves-light" >Search</button>
-				</div>
+				
 				</div>
 			</form>
 			</div>

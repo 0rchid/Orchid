@@ -207,7 +207,7 @@
 
 ?>
 <nav>
-  <div class="pink nav-wrapper">
+  <div style = "background-color: #ff3498" class=" nav-wrapper">
     <a href="#" class="brand-logo">Orchid</a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
       <li> <a href = "login.php">Log In </a>
