@@ -167,6 +167,7 @@
             </div>
             <div class='card-action'>
 							<a id = 'like' style='color: #b60046;' >Like</a>
+							<a class='center-align' style='color: #b60046;'>$row[4]</a>
 							<a onclick='func$row[0]()'class = 'right' style='cursor:pointer; color: #b60046;' >$row[2] </a>
 						</div>
 					</div>
@@ -197,7 +198,9 @@
 		// check to see if user has entered anything
 		if ($content != "") {
 	 		// build SQL query
-			$query = "INSERT INTO posts (user, hashtag, content) VALUES ('$user', '$hashtag', '$content')";
+			date_default_timezone_set("America/New_York");
+			$timedate = date("F j, Y")." at ".date("g:i a");
+			$query = "INSERT INTO posts (user, hashtag, content, timedate) VALUES ('$user', '$hashtag', '$content', '$timedate')";
 			// run the query
      		$result = mysqli_query($connection,$query) or die ("Error in query: $query. ".mysql_error());
 			// refresh the page to show new update
