@@ -103,7 +103,7 @@
 
 
 <div class="row">
-			<form action="<?=$_SERVER['PHP_SELF']?>" method="post" class="col s12">
+			<form id="hashform" action="<?=$_SERVER['PHP_SELF']?>" method="post" class="col s12">
 				<div class="row">
 				<div class = "input-field s6">
 					<input id = "hashtagsearch" class = "validate" type="text" name="hashtagsearch">
@@ -152,6 +152,12 @@
 		if (mysqli_num_rows($result) > 0) {
     		// print them one after another
     		while($row = mysqli_fetch_row($result)) {
+					echo"<script>
+					function func$row[0]() {
+					document.getElementById('hashform').elements[0].value = '$row[2]';
+					document.getElementById('hashform').submit();
+					}
+					</script>";
         		echo "<div class='row'>
         <div class='col s12 m12'>
           <div class='card darken-3'style='background-color: #7be6b4' >
@@ -161,7 +167,7 @@
             </div>
             <div class='card-action'>
 							<a id = 'like' style='color: #b60046;' >Like</a>
-							<a class = 'right' style='color: #b60046;' >$row[2] </a>
+							<a onclick='func$row[0]()'class = 'right' style='cursor:pointer; color: #b60046;' >$row[2] </a>
 						</div>
 					</div>
 				</div>
