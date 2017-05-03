@@ -1,5 +1,6 @@
 <html>
-
+<title>Orchid</title>
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 <?php
 	//b60046
 	//ff3498
@@ -47,6 +48,9 @@
     bottom: 10%;
     left:7%;
   }
+	<?php
+$safeemail = htmlentities($arr[2]);
+?>
 	.saturate {-webkit-filter: saturate(7); filter: saturate(7);}
 </style>
 
@@ -60,7 +64,7 @@
 
 				<img class = "brand-logo" style="display:inline;" src="logo.png">
 	      <ul id="nav-mobile" class="right hide-on-med-and-down">
-	        <li><a class = "dropdown-button pink-lighter" data-activates='dropdown1'><?php  echo $arr[2]; ?></a></li>
+	        <li><a class = "dropdown-button pink-lighter" data-activates='dropdown1'><?php  echo $safeemail; ?></a></li>
 	      </ul>
 				<br>
 				<div class="nav-content">
@@ -149,9 +153,9 @@
 
  		$user = $arr[1];
 
-		$hashtag = $_POST['hashtag'];
+		$hashtag = mysqli_real_escape_string($connection, $_POST['hashtag']);
 
-		$hashtagsearch = $_POST['hashtagsearch'];
+		$hashtagsearch = mysqli_real_escape_string($connection, $_POST['hashtagsearch']);
 		// check to see if user has entered anything
 		if ($hashtagsearch != "") {
 	 		// build SQL query
@@ -163,9 +167,12 @@
 		if (mysqli_num_rows($result) > 0) {
     		// print them one after another
     		while($row = mysqli_fetch_row($result)) {
+					$safecontent = htmlentities($row[3]);
+					$safehashtag = htmlentities($row[2]);
+					$safeuser = htmlentities($row[1]);
 					echo"<script>
 					function func$row[0]() {
-					document.getElementById('hashform').elements[0].value = '$row[2]';
+					document.getElementById('hashform').elements[0].value = '$safehashtag';
 					document.getElementById('hashform').submit();
 					}
 					</script>";
@@ -173,12 +180,12 @@
         <div class='col s12 m12'>
           <div class='card darken-3'style='background-color: #7be6b4' >
             <div class='card-content text'>
-              <span class='card-title' style = 'font-weight: 400; color : #b60046;'>$row[1]</span>
-              <p>$row[3]</p>
+              <span class='card-title' style = 'font-weight: 400; color : #b60046;'>$safeuser</span>
+              <p>$safecontent</p>
             </div>
             <div class='card-action'>
 							<a id = 'like' style='color: #b60046;' >Like</a>
-							<a onclick='func$row[0]()'class = 'right' style='cursor:pointer; color: #b60046;' >$row[2] </a>
+							<a onclick='func$row[0]()'class = 'right' style='cursor:pointer; color: #b60046;' >$safehashtag </a>
 						</div>
 					</div>
 				</div>
@@ -203,7 +210,7 @@
 		// free result set memory
 		mysqli_free_result($connection,$result);
 		// set variable values to HTML form inputs
-    	$content = $_POST['content'];
+    	$content = mysqli_real_escape_string($connection, $_POST['content']);
 
 		// check to see if user has entered anything
 		if ($content != "") {
