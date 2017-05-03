@@ -17,7 +17,7 @@
 
 	if(empty($_SESSION['user'])) {
 		// If they are not, we redirect them to the login page.
-		$location = "http://" . $_SERVER['HTTP_HOST'] . "/Orchid/login.php";
+		$location = "http://" . $_SERVER['HTTP_HOST'] . "/orchid/login.php";
 		echo '<META HTTP-EQUIV="refresh" CONTENT="0;URL='.$location.'">';
 		//exit;
 				// Remember that this die statement is absolutely critical.  Without it,
@@ -144,7 +144,6 @@ $safeemail = htmlentities($arr[2]);
 
 		// select database
 		mysqli_select_db($connection, $dbname) or die ("Unable to select database!");
-		$hashtag = $_POST['hashtag'];
 		// create query
 		$query = "SELECT * FROM posts ORDER BY id DESC";
 
@@ -186,7 +185,7 @@ $safeemail = htmlentities($arr[2]);
             <div class='card-action'>
 							<a id = 'like' style='color: #b60046;' >Like</a>
 							<a onclick='func$row[0]()'class = 'right' style='cursor:pointer; color: #b60046;' >$safehashtag </a>
-							
+							<a class='center-align' style='color: #b60046;'>$row[4]</a>
 						</div>
 					</div>
 				</div>
@@ -206,7 +205,9 @@ $safeemail = htmlentities($arr[2]);
 		// check to see if user has entered anything
 		if ($content != "") {
 	 		// build SQL query
-			$query = "INSERT INTO posts (user, hashtag, content) VALUES ('$user', '$hashtag', '$content')";
+			date_default_timezone_set("America/New_York");
+			$timedate = date("F j, Y")." at ".date("g:i a");
+			$query = "INSERT INTO posts (user, hashtag, content, timedate) VALUES ('$user', '$hashtag', '$content', '$timedate')";
 			// run the query
      		$result = mysqli_query($connection,$query) or die ("Error in query: $query. ".mysql_error());
 			// refresh the page to show new update
@@ -221,25 +222,12 @@ $safeemail = htmlentities($arr[2]);
 
  </section>
  <section id = "profile">
-	 <div class="row">
-	 			<form id="hashform" action="<?=$_SERVER['PHP_SELF']?>" method="post" class="col s12">
-	 				<div class="row">
-	 				<div class = "input-field s6">
-	 					<input id = "hashtagsearch" class = "validate" type="text" name="hashtagsearch">
-	 					<label for = "hashtagsearch">Search Hashtags<label>
-	 				</div>
-
-
-	 				</div>
-	 			</form>
-	 			</div>
 	 <?php
  		// open connection
  		$connection = mysqli_connect($host, $username, $password) or die ("Unable to connect!");
 
  		// select database
  		mysqli_select_db($connection, $dbname) or die ("Unable to select database!");
- 		$hashtag = $_POST['hashtag'];
  		// create query
 		$user = $arr[1];
  		$query = "SELECT * FROM posts WHERE user = '$arr[1]' ORDER BY id DESC";
@@ -248,17 +236,6 @@ $safeemail = htmlentities($arr[2]);
  		$result = mysqli_query($connection,$query) or die ("Error in query: $query. ".mysql_error());
 
 
-
- 		$hashtag = $_POST['hashtag'];
-
- 		$hashtagsearch = $_POST['hashtagsearch'];
- 		// check to see if user has entered anything
- 		if ($hashtagsearch != "") {
- 	 		// build SQL query
- 			$query = "SELECT * FROM posts WHERE hashtag LIKE '%$hashtagsearch%' ORDER BY id DESC";
- 			// run the query
-      	$result = mysqli_query($connection,$query) or die ("Error in query: $query. ".mysql_error());
- 		}
  		// see if any rows were returned
  		if (mysqli_num_rows($result) > 0) {
     		// print them one after another
@@ -271,12 +248,15 @@ $safeemail = htmlentities($arr[2]);
           <div class='card darken-3'style='background-color: #7be6b4' >
             <div class='card-content text'>
               <span class='card-title' style = 'font-weight: 400; color : #b60046;'>$safeuser</span>
+							<a class='right waves-effect waves-light btn' style = 'background-color:#b60046' href='#modal$row[0]'>Delete</a>
               <p>$safecontent</p>
+							
             </div>
             <div class='card-action'>
 							<a id = 'like' style='color: #b60046;' >Like</a>
 							<a onclick='func$row[0]()'class = 'right' style='cursor:pointer; color: #b60046;' >$safehashtag </a>
-							<a class='waves-effect waves-light btn red' href='#modal$row[0]'>Delete</a>
+							
+							<a class='center-align' style='color: #b60046;'>$row[4]</a>
 						</div>
 					</div>
 				</div>
@@ -302,7 +282,7 @@ $safeemail = htmlentities($arr[2]);
  		// free result set memory
  		mysqli_free_result($connection,$result);
  		// set variable values to HTML form inputs
-     	$content = $_POST['content'];
+     	$content = mysqli_real_escape_string($connection, $_POST['content']);
 
  		// check to see if user has entered anything
  		// if DELETE pressed, set an id, if id is set then delete it from DB
