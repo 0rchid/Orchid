@@ -78,10 +78,10 @@ $safeemail = htmlentities($arr[2]);
 	  </nav>
 	</div>
 		<ul id='dropdown1' class='dropdown-content'>
-    	<li><a href="">Profile</a></li>
-    	<li><a href="logout.php">Logout</a></li>
-			<li class = "divider">
 			<li><a href="#modal1">Post</a></li>
+			<li class = "divider">
+			<li><a href="logout.php">Logout</a></li>
+			
 
   </ul>
 	</div>
