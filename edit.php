@@ -204,9 +204,7 @@ $safeemail = htmlentities($arr[2]);
 		// check to see if user has entered anything
 		if ($content != "") {
 	 		// build SQL query
-			date_default_timezone_set("America/New_York");
-			$timedate = date("F j, Y")." at ".date("g:i a");
-			$query = "INSERT INTO posts (user, hashtag, content, timedate) VALUES ('$user', '$hashtag', '$content', '$timedate')";
+			$query = "INSERT INTO posts (user, hashtag, content) VALUES ('$user', '$hashtag', '$content')";
 			// run the query
      		$result = mysqli_query($connection,$query) or die ("Error in query: $query. ".mysql_error());
 			// refresh the page to show new update
