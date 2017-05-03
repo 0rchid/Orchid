@@ -70,8 +70,8 @@ $safeemail = htmlentities($arr[2]);
 				<div class="nav-content">
 	        <ul class="tabs tabs-transparent">
 	          <li class="tab right"><a class = "active " href="#home">Home</a></li>
-	          <li class="tab right "><a class="active " href="#profile">Profile </a></li>
-						<li class="tab right "><a class="active " href="#about">About </a></li>
+	          <li class="tab right "><a  href="#profile">Profile </a></li>
+						<li class="tab right "><a  href="#about">About </a></li>
 	        </ul>
 	      </div>
 	    </div>
@@ -434,7 +434,7 @@ $safeemail = htmlentities($arr[2]);
         </div>
 				<div class="row">
           <h2 class="header">Github</h2>
-          <p class="caption">We are using Github to edit the php pages</p>
+          <b>We are using Github to edit the php pages</b>
           <div class="s12 center">
 
           </div>
