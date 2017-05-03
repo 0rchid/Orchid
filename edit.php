@@ -48,22 +48,19 @@
     bottom: 10%;
     left:7%;
   }
-	<?php
+<?php
 $safeemail = htmlentities($arr[2]);
 ?>
 	.saturate {-webkit-filter: saturate(7); filter: saturate(7);}
 </style>
-
-
 </head>
 	<body>
 		<div class = "navbar-fixed">
 		<nav class = "nav-extended">
 	    <div class="nav-wrapper" style="background-color: #ff3498;">
-
-
 				<img class = "brand-logo" style="display:inline;" src="logo.png">
-	      <ul id="nav-mobile" class="right hide-on-med-and-down">
+	      <ul id="nav-mobile" class="right ">
+					<li><a class="btn valign-wrapper" style="background-color: #7be6b4; color: #b60046;" href="#modal1">Create New Post</a></li>
 	        <li><a class = "dropdown-button pink-lighter" data-activates='dropdown1'><?php  echo $safeemail; ?></a></li>
 	      </ul>
 				<br>
@@ -81,12 +78,9 @@ $safeemail = htmlentities($arr[2]);
 			<li><a href="#modal1">Post</a></li>
 			<li class = "divider">
 			<li><a href="logout.php">Logout</a></li>
-			
-
   </ul>
 	</div>
-
-
+	
   <!-- Modal Structure -->
   <div id="modal1" class="modal">
     <div class="modal-content">
@@ -111,33 +105,19 @@ $safeemail = htmlentities($arr[2]);
 	<br>
 	<br>
 	<br>
-
-
-
-
-
 	<div class = "container">
 		<section id = "home">
 			<div class="row">
-						<form id="hashform" action="<?=$_SERVER['PHP_SELF']?>" method="post" class="col s12">
-							<div class="row">
-							<div class = "input-field s6">
-								<input id = "hashtagsearch" class = "validate" type="text" name="hashtagsearch">
-								<label for = "hashtagsearch">Search Hashtags<label>
-							</div>
-
-
-							</div>
-						</form>
+				<form id="hashform" action="<?=$_SERVER['PHP_SELF']?>" method="post" class="col s12">
+					<div class="row">
+						<div class = "input-field s6">
+							<input id = "hashtagsearch" class = "validate" type="text" name="hashtagsearch">
+							<label for = "hashtagsearch">Search Hashtags<label>
 						</div>
-
-
-
-
-
-
-
-
+					</div>
+				</form>
+			</div>
+			
 	<?php
 		// open connection
 		$connection = mysqli_connect($host, $username, $password) or die ("Unable to connect!");
