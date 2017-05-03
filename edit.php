@@ -1,17 +1,22 @@
 <html>
-<title>Orchid</title>
-<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
 <?php
 	//b60046
 	//ff3498
 	//ff78b0
 	//1b9596
+
 	//7be6b4
 		// pass in some info;
+
 	require("common.php");
+
+
+	//$_SESSION['user'] = "anf";
+
 	if(empty($_SESSION['user'])) {
 		// If they are not, we redirect them to the login page.
-		$location = "http://" . $_SERVER['HTTP_HOST'] . "/orchid/login.php";
+		$location = "http://" . $_SERVER['HTTP_HOST'] . "/Orchid/login.php";
 		echo '<META HTTP-EQUIV="refresh" CONTENT="0;URL='.$location.'">';
 		//exit;
 				// Remember that this die statement is absolutely critical.  Without it,
@@ -42,10 +47,9 @@
     bottom: 10%;
     left:7%;
   }
+	.saturate {-webkit-filter: saturate(7); filter: saturate(7);}
 </style>
-<?php
-$safeemail = htmlentities($arr[2]);
-?>
+
 
 </head>
 	<body>
@@ -56,13 +60,14 @@ $safeemail = htmlentities($arr[2]);
 
 				<img class = "brand-logo" style="display:inline;" src="logo.png">
 	      <ul id="nav-mobile" class="right hide-on-med-and-down">
-	        <li><a class = "dropdown-button pink-lighter" data-activates='dropdown1'><?php  echo $safeemail; ?></a></li>
+	        <li><a class = "dropdown-button pink-lighter" data-activates='dropdown1'><?php  echo $arr[2]; ?></a></li>
 	      </ul>
 				<br>
 				<div class="nav-content">
 	        <ul class="tabs tabs-transparent">
-	          <li class="tab right"><a class = "active  " href="#test1">Home</a></li>
-	          <li class="tab right "><a class="active " href="#test2">Profile </a></li>
+	          <li class="tab right"><a class = "active " href="#home">Home</a></li>
+	          <li class="tab right "><a class="active " href="#profile">Profile </a></li>
+						<li class="tab right "><a class="active " href="#about">About </a></li>
 	        </ul>
 	      </div>
 	    </div>
@@ -105,19 +110,22 @@ $safeemail = htmlentities($arr[2]);
 
 
 
-<div class="row">
-			<form id="hashform" action="<?=$_SERVER['PHP_SELF']?>" method="post" class="col s12">
-				<div class="row">
-				<div class = "input-field s6">
-					<input id = "hashtagsearch" class = "validate" type="text" name="hashtagsearch">
-					<label for = "hashtagsearch">Search Hashtags<label>
-				</div>
 
-				
-				</div>
-			</form>
-			</div>
+
 	<div class = "container">
+		<section id = "home">
+			<div class="row">
+						<form id="hashform" action="<?=$_SERVER['PHP_SELF']?>" method="post" class="col s12">
+							<div class="row">
+							<div class = "input-field s6">
+								<input id = "hashtagsearch" class = "validate" type="text" name="hashtagsearch">
+								<label for = "hashtagsearch">Search Hashtags<label>
+							</div>
+
+
+							</div>
+						</form>
+						</div>
 
 
 
@@ -141,9 +149,9 @@ $safeemail = htmlentities($arr[2]);
 
  		$user = $arr[1];
 
-		$hashtag = mysqli_real_escape_string($connection, $_POST['hashtag']);
+		$hashtag = $_POST['hashtag'];
 
-		$hashtagsearch = mysqli_real_escape_string($connection, $_POST['hashtagsearch']);
+		$hashtagsearch = $_POST['hashtagsearch'];
 		// check to see if user has entered anything
 		if ($hashtagsearch != "") {
 	 		// build SQL query
@@ -155,26 +163,22 @@ $safeemail = htmlentities($arr[2]);
 		if (mysqli_num_rows($result) > 0) {
     		// print them one after another
     		while($row = mysqli_fetch_row($result)) {
-					$safecontent = htmlentities($row[3]);
-					$safehashtag = htmlentities($row[2]);
-					$safeuser = htmlentities($row[1]);
 					echo"<script>
 					function func$row[0]() {
-					document.getElementById('hashform').elements[0].value = '$safehashtag';
+					document.getElementById('hashform').elements[0].value = '$row[2]';
 					document.getElementById('hashform').submit();
 					}
-					</script>";	
+					</script>";
         		echo "<div class='row'>
         <div class='col s12 m12'>
           <div class='card darken-3'style='background-color: #7be6b4' >
             <div class='card-content text'>
-              <span class='card-title' style = 'font-weight: 400; color : #b60046;'>$safeuser</span>
-              <p>$safecontent</p>
+              <span class='card-title' style = 'font-weight: 400; color : #b60046;'>$row[1]</span>
+              <p>$row[3]</p>
             </div>
             <div class='card-action'>
 							<a id = 'like' style='color: #b60046;' >Like</a>
-							<a class='center-align' style='color: #b60046;'>$row[4]</a>
-							<a onclick='func$row[0]()'class = 'right' style='cursor:pointer; color: #b60046;' >$safehashtag </a>
+							<a onclick='func$row[0]()'class = 'right' style='cursor:pointer; color: #b60046;' >$row[2] </a>
 						</div>
 					</div>
 				</div>
@@ -199,7 +203,7 @@ $safeemail = htmlentities($arr[2]);
 		// free result set memory
 		mysqli_free_result($connection,$result);
 		// set variable values to HTML form inputs
-    	$content = mysqli_real_escape_string($connection, $_POST['content']);
+    	$content = $_POST['content'];
 
 		// check to see if user has entered anything
 		if ($content != "") {
@@ -227,6 +231,218 @@ $safeemail = htmlentities($arr[2]);
 	?>
 
 
- </div>   <!-- This is the HTML form that appears in the browser -->
+
+ </section>
+ <section id = "profile">
+	 <div class="row">
+	 			<form id="hashform" action="<?=$_SERVER['PHP_SELF']?>" method="post" class="col s12">
+	 				<div class="row">
+	 				<div class = "input-field s6">
+	 					<input id = "hashtagsearch" class = "validate" type="text" name="hashtagsearch">
+	 					<label for = "hashtagsearch">Search Hashtags<label>
+	 				</div>
+
+
+	 				</div>
+	 			</form>
+	 			</div>
+	 <?php
+ 		// open connection
+ 		$connection = mysqli_connect($host, $username, $password) or die ("Unable to connect!");
+
+ 		// select database
+ 		mysqli_select_db($connection, $dbname) or die ("Unable to select database!");
+ 		$hashtag = $_POST['hashtag'];
+ 		// create query
+		$user = $arr[1];
+ 		$query = "SELECT * FROM posts WHERE user = '$arr[1]' ORDER BY id DESC";
+
+ 		// execute query
+ 		$result = mysqli_query($connection,$query) or die ("Error in query: $query. ".mysql_error());
+
+
+
+ 		$hashtag = $_POST['hashtag'];
+
+ 		$hashtagsearch = $_POST['hashtagsearch'];
+ 		// check to see if user has entered anything
+ 		if ($hashtagsearch != "") {
+ 	 		// build SQL query
+ 			$query = "SELECT * FROM posts WHERE hashtag LIKE '%$hashtagsearch%' ORDER BY id DESC";
+ 			// run the query
+      	$result = mysqli_query($connection,$query) or die ("Error in query: $query. ".mysql_error());
+ 		}
+ 		// see if any rows were returned
+ 		if (mysqli_num_rows($result) > 0) {
+     		// print them one after another
+     		while($row = mysqli_fetch_row($result)) {
+ 					echo"<script>
+ 					function func$row[0]() {
+ 					document.getElementById('hashform').elements[0].value = '$row[2]';
+ 					document.getElementById('hashform').submit();
+ 					}
+ 					</script>";
+         		echo "<div class='row'>
+         <div class='col s12 m12'>
+           <div class='card darken-3'style='background-color: #7be6b4' >
+             <div class='card-content text'>
+               <span class='card-title' style = 'font-weight: 400; color : #b60046;'>$row[1]</span>
+               <p>$row[3]</p>
+             </div>
+             <div class='card-action'>
+ 							<a id = 'like' style='color: #b60046;' >Like</a>
+ 							<a onclick='func$row[0]()'class = 'right' style='cursor:pointer; color: #b60046;' >$row[2] </a>
+ 						</div>
+ 					</div>
+ 				</div>
+ 			</div>
+ 			";
+ 								//echo "
+ 			  						//	<div id='modal1' class='modal'>
+ 											//	<div class='modal-content'>
+ 											//		<h4>Are you sure?</h4>
+ 												//	<p>Are you sure you want to delete this row in the data base, once you do, you cannot return</p>
+ 												//	</div>
+ 											//	<div class='modal-footer'>
+ 											//		<a href=".$_SERVER['PHP_SELF']."?id=".$row[0]." style='background-color: #b60046;' class=' btn modal-action modal-close waves-effect waves-light'>Delete</a>
+ 											//		<a class = 'btn-flat modal-action modal-close waves-effect waves-green'> Cancel</a>
+ 											//	</div>
+ 			  							//</div>";
+     		}
+ 		} else {
+     		// print status message
+     		echo "No rows found!";
+ 		}
+ 		// free result set memory
+ 		mysqli_free_result($connection,$result);
+ 		// set variable values to HTML form inputs
+     	$content = $_POST['content'];
+
+ 		// check to see if user has entered anything
+ 		if ($content != "") {
+ 	 		// build SQL query
+ 			$query = "INSERT INTO posts (user, hashtag, content) VALUES ('$user', '$hashtag', '$content')";
+ 			// run the query
+      		$result = mysqli_query($connection,$query) or die ("Error in query: $query. ".mysql_error());
+ 			// refresh the page to show new update
+ 	 		echo "<meta http-equiv='refresh' content='0'>";
+ 		}
+ 		// if DELETE pressed, set an id, if id is set then delete it from DB
+ 		if (isset($_GET['id'])) {
+ 			// create query to delete record
+ 			echo $_SERVER['PHP_SELF'];
+     		$query = "DELETE FROM posts WHERE id = ".$_GET['id'];
+ 			// run the query
+      		$result = mysqli_query($connection,$query) or die ("Error in query: $query. ".mysql_error());
+ 			// reset the url to remove id $_GET variable
+ 			$location = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
+ 			echo '<META HTTP-EQUIV="refresh" CONTENT="0;URL='.$location.'">';
+ 			exit;
+ 		}
+ 		// close connection
+ 		mysqli_close($connection);
+ 	?>
+  	<!-- This is the HTML form that appears in the browser -->
+</section>
+<section id = "about">
+
+
+  <!--  Outer row  -->
+
+
+
+      <!--  Material Design -->
+			<div class = "right-align">
+	      <div class="toc-wrapper">
+	        <div style="height: 1px;">
+	          <ul class="section table-of-contents">
+	            <li><a href="#materialdesign">Orchid</a></li>
+	            <li><a href="#team">Meet the Team</a></li>
+	          </ul>
+	        </div>
+	      </div>
+	    </div>
+
+      <div id="materialdesign" class="section scrollspy">
+						<h2 class = "header">	Orchid Media</h2>
+						<p class = "caption">
+        		Orchid is a baseline social media, created by two students at Upper Canada College for a ICS4U project.
+							 We coded most of this ourselves with help of our computer science teacher Mark Hoel. Orchid can be used for chatting/posting and asking questions about anything. </p>
+			</p>
+			</div>
+			<div class="card" style = "background-color:#7be6b4;">
+				<div class="card-content">
+						<span class="card-title">Principles</span>
+					</div>
+					<div style = "color:#ff3498;" class="card-tabs">
+						<ul class="tabs tabs-fixed-width">
+							<li class="tab"><a class="active" href="#test4">Back-End</a></li>
+							<li class="tab"><a href="#test5">Front-End</a></li>
+							<li class="tab"><a href="#test6">Security</a></li>
+							</ul>
+						</div>
+						<div class="card-content grey lighten-4">
+							<div id="test4">Orchid's back end was mainly engineered by Douglas Byers, the co-head programmer. It incorporates amazon aws for the hosting and uses LAMP that was downloaded on the AWS server. Orchid uses basic PHP sessions for the users as well as MySQL for the database. </div>
+							<div id="test5">Orchid's front-end was developped by Andy Craig, another co-head programmer at Orchid. Orchid uses the CSS framework based on Material Design(google), Materializecss. Elements and components such as grids, typography, color, and imagery are not only visually pleasing, but also create a sense of hierarchy, meaning, and focus. Emphasis on different actions and components create a visual guide for users.</div>
+							<div id="test6">In the early stages of Orchid, we faced many difficulties surrounding SQL injections into the posts. Douglas Byers found ways to patch this error and make the website secure. The passwords and usernames are equippes with 3rd degree salts that encrypt the passwords so that no one can see. Not even us.</div>
+						</div>
+					</div>
+
+
+
+
+      <!--  About the Team-->
+      <div id="team" class="section scrollspy">
+        <div class="row">
+          <h2 class="header">Meet the Team</h2>
+          <p class="caption">We are a team of students from Upper Canada College</p>
+          <div class="s12 center">
+
+          </div>
+        </div>
+        <br />
+
+        <div class="row">
+          <div class="col s12 m3 center-on-small-only">
+            <div class="image-container">
+              <img class = "saturate" style = "border-radius: 50%; "width = "200px" height = "200px" src="doug.png">
+            </div>
+          </div>
+          <div class="col s12 m9">
+            <h4>Douglas Byers</h4>
+            <p>Alvin is an Information Systems and Human Computer Interaction Major. He worked as a Software Engineer at Fidelity Investments this past summer.</p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s12 m3 center-on-small-only">
+            <div class="image-container">
+              <img style = "border-radius: 50%;" width = "200px" height = "200px" src="andy.png">
+            </div>
+          </div>
+          <div class="col s12 m9">
+            <h4>Andy Craig</h4>
+            <p>Alan is an Information Systems major with a minor in computer science. He worked at as a Front End Developer at Shift Collaborative this past summer.</p>
+          </div>
+        </div>
+				<div class="row">
+          <h2 class="header">Github</h2>
+          <p class="caption">We are using Github to edit the php pages</p>
+          <div class="s12 center">
+
+          </div>
+        </div>
+
+
+
+    </div>
+    <!-- Table of Contents -->
+
+
+  </div>
+</div> <!-- End Container -->
+</div>
+</section>
+ </div>
 	</body>
 </html>
