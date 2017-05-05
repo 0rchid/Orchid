@@ -153,6 +153,7 @@ $(document).ready(function(){
 		$result = mysqli_query($connection,$query) or die ("Error in query: $query. ".mysql_error());
 
  		$user = $arr[1];
+		$sqluser = mysqli_real_escape_string($connection, $user);
 
 		$hashtag = mysqli_real_escape_string($connection, $_POST['hashtag']);
 
@@ -177,6 +178,15 @@ $(document).ready(function(){
 		if (mysqli_num_rows($result) > 0) {
     		// print them one after another
     		while($row = mysqli_fetch_row($result)) {
+					$numlikesquery = "SELECT COUNT(likeid) FROM likes WHERE postid = $row[0]";
+					$numlikes = mysqli_query($connection,$numlikesquery);
+					$num = mysqli_fetch_row($numlikes);
+					//$numlikes=5;
+					if ($_POST['like'.$row[0]]){
+							echo"<script>alert('test')</script>";
+   						$likequery = "INSERT INTO likes (postid, user) VALUES ('$row[0]', '$safeuser')";
+   						$likerun = mysql_query($connection,$likequery);
+						}
 					$safecontent = htmlentities($row[3]);
 					$safehashtag = htmlentities($row[2]);
 					$safeuser = htmlentities($row[1]);
@@ -186,28 +196,39 @@ $(document).ready(function(){
 					document.getElementById('hashform').submit();
 					}
 					</script>";
-        		echo "<div class='row'>
-        <div class='col s12 m12'>
-          <div class='card darken-3'style='background-color: #7be6b4' >
-            <div class='card-content text'>
-              <span class='card-title' style = 'font-weight: 400; color : #b60046;'>$safeuser</span>
-              <p>$safecontent</p>
+        		echo'<div class="row">
+        <div class="col s12 m12">
+          <div class="card darken-3"style="background-color: #7be6b4" >
+            <div class="card-content text">
+              <span class="card-title" style = "font-weight: 400; color : #b60046;">';echo"$safeuser"; echo'</span>
+              <p>'; echo"$safecontent"; echo'</p>
             </div>
-            <div class='card-action'>
-							<a id = 'like' style='color: #b60046;' >Like</a>
-							<a onclick='func$row[0]()'class = 'right' style='cursor:pointer; color: #b60046;' >$safehashtag </a>
-							<a class='center-align' style='color: #b60046;'>$row[4]</a>
+            <div class="card-action">
+							<a href='.$_SERVER['PHP_SELF'].'?postid='.$row[0].'>Like ('.$num[0].')</a>
+							<a onclick="func'; echo"$row[0]"; echo'()"class = "right" style="cursor:pointer; color: #b60046;" >'; echo"$safehashtag"; echo'</a>
+							<a class="center-align" style="color: #b60046;">'; echo"$row[4]"; echo'</a>
 						</div>
 					</div>
 				</div>
 			</div>
-			";
+						';
 
     		}
 		} else {
     		// print status message
     		echo "<script>Materialize.toast('Nothing matched your search!', 10000);</script>";
 		}
+		if (isset($_GET['postid'])) {
+ 			// create query to delete record
+ 			echo $_SERVER['PHP_SELF'];
+     		$query = "INSERT INTO likes (postid, user) VALUES ('".$_GET['postid']."','".$sqluser."')";
+ 			// run the query
+      	$result = mysqli_query($connection,$query) or die ("Error in query: $query. ".mysql_error());
+ 			// reset the url to remove id $_GET variable
+ 			$location = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
+ 			echo '<META HTTP-EQUIV="refresh" CONTENT="0;URL='.$location.'">';
+ 			exit;
+ 		}
 		// free result set memory
 		mysqli_free_result($connection,$result);
 		// set variable values to HTML form inputs
@@ -297,7 +318,6 @@ $(document).ready(function(){
  		// set variable values to HTML form inputs
      	$content = mysqli_real_escape_string($connection, $_POST['content']);
 
- 		// check to see if user has entered anything
  		// if DELETE pressed, set an id, if id is set then delete it from DB
  		if (isset($_GET['id'])) {
  			// create query to delete record
