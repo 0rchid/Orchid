@@ -129,6 +129,16 @@ $(document).ready(function(){
 					</div>
 				</form>
 			</div>
+			<div class="row">
+				<form id="userform" action="<?=$_SERVER['PHP_SELF']?>" method="post" class="col s12">
+					<div class="row">
+						<div class = "input-field s6">
+							<input id = "usersearch" class = "validate" type="text" name="usersearch">
+							<label for = "usersearch">Search Users<label>
+						</div>
+					</div>
+				</form>
+			</div>
 
 	<?php
 		// open connection
@@ -151,6 +161,15 @@ $(document).ready(function(){
 		if ($hashtagsearch != "") {
 	 		// build SQL query
 			$query = "SELECT * FROM posts WHERE hashtag LIKE '%$hashtagsearch%' ORDER BY id DESC";
+			// run the query
+     	$result = mysqli_query($connection,$query) or die ("Error in query: $query. ".mysql_error());
+		}
+
+		$usersearch = mysqli_real_escape_string($connection, $_POST['usersearch']);
+
+		if ($usersearch != "") {
+	 		// build SQL query
+			$query = "SELECT * FROM posts WHERE user LIKE '%$usersearch%' ORDER BY id DESC";
 			// run the query
      	$result = mysqli_query($connection,$query) or die ("Error in query: $query. ".mysql_error());
 		}
