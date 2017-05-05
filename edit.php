@@ -204,7 +204,7 @@ $(document).ready(function(){
               <p>'; echo"$safecontent"; echo'</p>
             </div>
             <div class="card-action">
-							<a href='.$_SERVER['PHP_SELF'].'?postid='.$row[0].'>Like ('.$num[0].')</a>
+							<a style="color: #b60046;" href='.$_SERVER['PHP_SELF'].'?postid='.$row[0].'>Like ('.$num[0].')</a>
 							<a onclick="func'; echo"$row[0]"; echo'()"class = "right" style="cursor:pointer; color: #b60046;" >'; echo"$safehashtag"; echo'</a>
 							<a class="center-align" style="color: #b60046;">'; echo"$row[4]"; echo'</a>
 						</div>
@@ -274,6 +274,11 @@ $(document).ready(function(){
  		if (mysqli_num_rows($result) > 0) {
     		// print them one after another
     		while($row = mysqli_fetch_row($result)) {
+
+					$numlikesquery = "SELECT COUNT(likeid) FROM likes WHERE postid = $row[0]";
+					$numlikes = mysqli_query($connection,$numlikesquery);
+					$num = mysqli_fetch_row($numlikes);
+
 					$safecontent = htmlentities($row[3]);
 					$safehashtag = htmlentities($row[2]);
 					$safeuser = htmlentities($row[1]);
@@ -287,7 +292,8 @@ $(document).ready(function(){
 
             </div>
             <div class='card-action'>
-							<a id = 'like' style='color: #b60046;' >Like</a>
+							
+							<a id = 'like' style='color: #b60046;' >Like (".$num[0].")</a>
 							<a onclick='func$row[0]()'class = 'right' style='cursor:pointer; color: #b60046;' >$safehashtag </a>
 
 							<a class='center-align' style='color: #b60046;'>$row[4]</a>
