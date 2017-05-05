@@ -13,6 +13,7 @@
 	require("common.php");
 
 
+
 	//$_SESSION['user'] = "anf";
 
 	if(empty($_SESSION['user'])) {
@@ -26,6 +27,8 @@
 		}
 	// To access $_SESSION['user'] values put in an array, show user his username
 	$arr = array_values($_SESSION['user']);
+
+
 ?>
 
 <head>
@@ -77,9 +80,10 @@ $(document).ready(function(){
 				<br>
 				<div class="nav-content">
 	        <ul class="tabs tabs-transparent">
-	          <li class="tab right"><a class = "active " href="#home">Home</a></li>
-	          <li class="tab right "><a  href="#profile">Profile </a></li>
+	          <li class="tab right"><a class = "active " href="#home">Home </a></li>
+	          <li class="tab right "><a  href="#profile">Profile <span style = "color:#7be6b4" class="badge">6</span></a></li>
 						<li class="tab right "><a  href="#about">About </a></li>
+						<li class="tab right "><a  href="#help">Help </a></li>
 	        </ul>
 	      </div>
 	    </div>
@@ -361,7 +365,7 @@ $(document).ready(function(){
 	    </div>
 
       <div id="materialdesign" class="section scrollspy">
-						<h2 class = "header">	Orchid Media</h2>
+						<h2 style = " color : #009688" class = "header">	Orchid Media</h2>
 						<p class = "caption">
         		Orchid is a baseline social media, created by two students at Upper Canada College for a ICS4U project.
 							 We coded most of this ourselves with help of our computer science teacher Mark Hoel. Orchid can be used for chatting/posting and asking questions about anything. </p>
@@ -391,7 +395,7 @@ $(document).ready(function(){
       <!--  About the Team-->
       <div id="team" class="section scrollspy">
         <div class="row">
-          <h2 class="header">Meet the Team</h2>
+          <h2 class="header" style = " color : #009688">Meet the Team</h2>
           <p class="caption">We are a team of students from Upper Canada College</p>
           <div class="s12 center">
 
@@ -407,8 +411,8 @@ $(document).ready(function(){
           </div>
           <div class="col s12 m9">
             <h4>Douglas Byers</h4>
-            <p>Alvin is an Information Systems and Human Computer Interaction Major. He worked as a Software Engineer at Fidelity Investments this past summer.</p>
-          </div>
+            <p></p>
+						  </div>
         </div>
 
         <div class="row">
@@ -423,7 +427,7 @@ $(document).ready(function(){
           </div>
         </div>
 				<div class="row">
-          <h2 class="header">Github</h2>
+          <a href = "https://github.com/0rchid"><h2 style = " color : #009688" class="header">Github</h2></a>
           <b>We are using Github to edit the php pages</b>
           <div class="s12 center">
 
@@ -434,6 +438,33 @@ $(document).ready(function(){
 				GitHub offers both plans for private and free repositories on the same account which are commonly used to host open-source software projects. As of April 2017, GitHub reports having almost 20 million users and 57 million repositories, making it the largest host of source code in the world.
 
 			</p>
+			<div class = "row">
+			<b>Current Tasks at Hand:</b>
+		</div>
+			<ul class = "collection">
+				<li class = "collection-item"> User search: <br>
+					<div class="progress">
+    					<div class="determinate" style="width: 100%"></div>
+  				</div>
+				</li>
+				<li class = "collection-item"> Like button: <br>
+					<div class="progress">
+    					<div class="determinate" style="width: 10%"></div>
+  				</div>
+				</li>
+				<li class = "collection-item"> About Page: <br>
+					<div class="progress">
+    					<div class="determinate" style="width: 70%"></div>
+  				</div>
+				</li>
+				<li class = "collection-item"> Total Project: <br>
+					<div class="progress">
+    					<div class="determinate red" style="width: 60%"></div>
+  				</div>
+				</li>
+			</ul>
+
+
 
     </div>
     <!-- Table of Contents -->
@@ -442,6 +473,9 @@ $(document).ready(function(){
   </div>
 </div> <!-- End Container -->
 </div>
+</section>
+<section id = "help">
+	Nothing Yet :(
 </section>
  </div>
 	</body>
