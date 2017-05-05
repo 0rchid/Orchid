@@ -30,17 +30,14 @@
 
 <head>
   <!-- Compiled and minified CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <script>
-	$(document).ready(function(){
-		// the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-		$('.modal').modal();
-	});
-  </script>
+
+
   <style>
   #toast-container {
     top: auto !important;
@@ -48,11 +45,22 @@
     bottom: 10%;
     left:7%;
   }
+
+
+
 <?php
 $safeemail = htmlentities($arr[2]);
 ?>
 	.saturate {-webkit-filter: saturate(7); filter: saturate(7);}
 </style>
+<script>
+$(document).ready(function(){
+	// the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+	$('.modal').modal();
+	Materialize.toast("Have you filled out our survey?,<br> Click on your email in the top right", 6000)
+});
+</script>
+
 </head>
 	<body>
 		<div class = "navbar-fixed">
@@ -76,11 +84,12 @@ $safeemail = htmlentities($arr[2]);
 	</div>
 		<ul id='dropdown1' class='dropdown-content'>
 			<li><a href="#modal1">Post</a></li>
+			<li><a href="https://docs.google.com/a/ucc.on.ca/forms/d/e/1FAIpQLSeqX1jTXj3tcLzVQb_VqmOxzl-x5EK0nKa94hUn8nW0TWTDWA/viewform?usp=sf_link">Survey</a></li>
 			<li class = "divider">
 			<li><a href="logout.php">Logout</a></li>
   </ul>
 	</div>
-	
+
   <!-- Modal Structure -->
   <div id="modal1" class="modal">
     <div class="modal-content">
@@ -117,7 +126,7 @@ $safeemail = htmlentities($arr[2]);
 					</div>
 				</form>
 			</div>
-			
+
 	<?php
 		// open connection
 		$connection = mysqli_connect($host, $username, $password) or die ("Unable to connect!");
@@ -171,7 +180,7 @@ $safeemail = htmlentities($arr[2]);
 				</div>
 			</div>
 			";
-								
+
     		}
 		} else {
     		// print status message
@@ -195,7 +204,7 @@ $safeemail = htmlentities($arr[2]);
 		}
 		// if DELETE pressed, set an id, if id is set then delete it from DB
 		// close connection
-		
+
 	?>
 
 
@@ -230,12 +239,12 @@ $safeemail = htmlentities($arr[2]);
               <span class='card-title' style = 'font-weight: 400; color : #b60046;'>$safeuser</span>
 							<a class='right waves-effect waves-light btn' style = 'background-color:#b60046' href='#modal$row[0]'>Delete</a>
               <p>$safecontent</p>
-							
+
             </div>
             <div class='card-action'>
 							<a id = 'like' style='color: #b60046;' >Like</a>
 							<a onclick='func$row[0]()'class = 'right' style='cursor:pointer; color: #b60046;' >$safehashtag </a>
-							
+
 							<a class='center-align' style='color: #b60046;'>$row[4]</a>
 						</div>
 					</div>
@@ -253,7 +262,7 @@ $safeemail = htmlentities($arr[2]);
 													<a class = 'btn-flat modal-action modal-close waves-effect waves-green'> Cancel</a>
 												</div>
 			  							</div>";
-		
+
      		}
  		} else {
      		// print status message
