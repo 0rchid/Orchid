@@ -57,7 +57,7 @@ $safeemail = htmlentities($arr[2]);
 $(document).ready(function(){
 	// the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
 	$('.modal').modal();
-	Materialize.toast("Have you filled out our survey?,<br> Click on your email in the top right", 6000)
+
 });
 </script>
 
@@ -66,7 +66,10 @@ $(document).ready(function(){
 		<div class = "navbar-fixed">
 		<nav class = "nav-extended">
 	    <div class="nav-wrapper" style="background-color: #ff3498;">
+
+				<a href = "edit.php">
 				<img class = "brand-logo" style="display:inline;" src="logo.png">
+			</a>
 	      <ul id="nav-mobile" class="right ">
 					<li><a class="btn valign-wrapper" style="background-color: #7be6b4; color: #b60046;" href="#modal1">Create New Post</a></li>
 	        <li><a class = "dropdown-button pink-lighter" data-activates='dropdown1'><?php  echo $safeemail; ?></a></li>
@@ -84,7 +87,7 @@ $(document).ready(function(){
 	</div>
 		<ul id='dropdown1' class='dropdown-content'>
 			<li><a href="#modal1">Post</a></li>
-			<li><a href="https://docs.google.com/a/ucc.on.ca/forms/d/e/1FAIpQLSeqX1jTXj3tcLzVQb_VqmOxzl-x5EK0nKa94hUn8nW0TWTDWA/viewform?usp=sf_link">Survey</a></li>
+			<li><a target = "_blank" href="https://docs.google.com/a/ucc.on.ca/forms/d/e/1FAIpQLSeqX1jTXj3tcLzVQb_VqmOxzl-x5EK0nKa94hUn8nW0TWTDWA/viewform?usp=sf_link">Survey</a></li>
 			<li class = "divider">
 			<li><a href="logout.php">Logout</a></li>
   </ul>
@@ -184,7 +187,7 @@ $(document).ready(function(){
     		}
 		} else {
     		// print status message
-    		echo "No rows found!";
+    		echo "<script>Materialize.toast('Nothing matched your search!', 10000);</script>";
 		}
 		// free result set memory
 		mysqli_free_result($connection,$result);
@@ -201,7 +204,9 @@ $(document).ready(function(){
      		$result = mysqli_query($connection,$query) or die ("Error in query: $query. ".mysql_error());
 			// refresh the page to show new update
 	 		echo "<meta http-equiv='refresh' content='0'>";
+
 		}
+
 		// if DELETE pressed, set an id, if id is set then delete it from DB
 		// close connection
 
@@ -297,7 +302,7 @@ $(document).ready(function(){
   <!--  Outer row  -->
 
 
-
+	<script>Materialize.toast('Have you filled out our survey?,<br> Click on your email in the top right', 1000);</script>
       <!--  Material Design -->
 			<div class = "right-align">
 	      <div class="toc-wrapper">
