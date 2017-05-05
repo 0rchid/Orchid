@@ -221,9 +221,9 @@ $(document).ready(function(){
 		if (isset($_GET['postid'])) {
  			// create query to delete record
  			echo $_SERVER['PHP_SELF'];
-     		$query = "INSERT INTO likes (postid, user) VALUES ('".$_GET['postid']."','".$sqluser."')";
+     		$likeyquery = "INSERT INTO likes (postid, user) VALUES ('".$_GET['postid']."','".$sqluser."')";
  			// run the query
-      	$result = mysqli_query($connection,$query) or die ("Error in query: $query. ".mysql_error());
+      	$likey = mysqli_query($connection,$likeyquery) or die ("Error in query: $likeyquery. ".mysql_error());
  			// reset the url to remove id $_GET variable
  			$location = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
  			echo '<META HTTP-EQUIV="refresh" CONTENT="0;URL='.$location.'">';
