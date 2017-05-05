@@ -119,26 +119,26 @@ $(document).ready(function(){
 	<br>
 	<div class = "container">
 		<section id = "home">
+
 			<div class="row">
-				<form id="hashform" action="<?=$_SERVER['PHP_SELF']?>" method="post" class="col s12">
-					<div class="row">
-						<div class = "input-field s6">
+    		<form id="hashform" action="<?=$_SERVER['PHP_SELF']?>" method="post" class="">
+      		<div class="row">
+        		<div class="input-field col s6">
 							<input id = "hashtagsearch" class = "validate" type="text" name="hashtagsearch">
 							<label for = "hashtagsearch">Search Hashtags<label>
-						</div>
-					</div>
+        	</div>
+					</form>
+				<form id="userform" action="<?=$_SERVER['PHP_SELF']?>" method="post" class="">
+        <div class="input-field col s6">
+					<input id = "usersearch" class = "validate" type="text" name="usersearch">
+					<label for = "usersearch">Search Users<label>
+        </div>
 				</form>
-			</div>
-			<div class="row">
-				<form id="userform" action="<?=$_SERVER['PHP_SELF']?>" method="post" class="col s12">
-					<div class="row">
-						<div class = "input-field s6">
-							<input id = "usersearch" class = "validate" type="text" name="usersearch">
-							<label for = "usersearch">Search Users<label>
-						</div>
-					</div>
-				</form>
-			</div>
+      </div>
+
+  </div>
+
+
 
 	<?php
 		// open connection
