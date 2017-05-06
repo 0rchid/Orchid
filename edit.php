@@ -27,6 +27,18 @@
 		}
 	// To access $_SESSION['user'] values put in an array, show user his username
 	$arr = array_values($_SESSION['user']);
+	$connection = mysqli_connect($host, $username, $password) or die ("Unable to connect!");
+
+	// select database
+	mysqli_select_db($connection, $dbname) or die ("Unable to select database!");
+	$query = "SELECT COUNT(*) c FROM posts WHERE user = 'Andy'";
+
+	$result = mysqli_query($connection,$query);
+	$row = mysqli_fetch_assoc($result);
+	 //Here is your count
+
+	// execute query
+
 
 
 ?>
@@ -81,7 +93,7 @@ $(document).ready(function(){
 				<div class="nav-content">
 	        <ul class="tabs tabs-transparent">
 	          <li class="tab right"><a class = "active " href="#home">Home </a></li>
-	          <li class="tab right "><a  href="#profile">Profile <span style = "color:#7be6b4" class="badge">6</span></a></li>
+	          <li class="tab right "><a  href="#profile">Profile <span style = "color:#7be6b4" class="badge"> <?php echo $row['c'];?></span></a></li>
 						<li class="tab right "><a  href="#about">About </a></li>
 						<li class="tab right "><a  href="#help">Help </a></li>
 	        </ul>
@@ -296,7 +308,7 @@ $(document).ready(function(){
 
             </div>
             <div class='card-action'>
-							
+
 							<a id = 'like' style='color: #b60046;' >Like (".$num[0].")</a>
 							<a onclick='func$row[0]()'class = 'right' style='cursor:pointer; color: #b60046;' >$safehashtag </a>
 
