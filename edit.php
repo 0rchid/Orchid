@@ -51,7 +51,7 @@
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+	<link rel="stylesheet" href="css/font-awesome.min.css">
 
   <style>
   #toast-container {
@@ -236,21 +236,35 @@ $(document).ready(function(){
 					document.getElementById('hashform').submit();
 					}
 					</script>";
-        		echo'<div class="row">
-        <div class="col s12 m12">
-          <div class="card darken-3"style="background-color: #7be6b4" >
-            <div class="card-content text">
-              <span class="card-title" style = "font-weight: 400; color : #b60046;">';echo"$safeuser"; echo'</span>
-              <p>'; echo"$safecontent"; echo'</p>
-            </div>
-            <div class="card-action">
-							<a style="color: #b60046;" href='.$_SERVER['PHP_SELF'].'?postid='.$row[0].'>Like ('.$num[0].')</a>
-							<a onclick="func'; echo"$row[0]"; echo'()"class = "right" style="cursor:pointer; color: #b60046;" >'; echo"$safehashtag"; echo'</a>
-							<a class="center-align" style="color: #b60046;">'; echo"$row[4]"; echo'</a>
+        		echo'
+						<ul class="collapsible" data-collapsible="accordion">
+						<li>
+						<div class="collapsible-header">
+						<div class="row">
+	        <div class="col s12 m12">
+	          <div class="card darken-3"style="background-color: #7be6b4" >
+	            <div class="card-content text">
+	              <span class="card-title" style = "font-weight: 400; color : #b60046;">';echo"$safeuser"; echo'</span>
+	              <p>'; echo"$safecontent"; echo'</p>
+	            </div>
+	            <div class="card-action">
+
+
+								<a style="color: #b60046;" href='.$_SERVER['PHP_SELF'].'?postid='.$row[0].'>Like ('.$num[0].')</a>
+								<a onclick="func'; echo"$row[0]"; echo'()"class = "right" style="cursor:pointer; color: #b60046;" >'; echo"$safehashtag"; echo'</a>
+								<a class="center-align" style="color: #b60046;">'; echo"$row[4]"; echo'</a>
+
+
+							</div>
 						</div>
 					</div>
-				</div>
 			</div>
+<i class = "fa fa-angle-down"></i><p>Comments</p>
+						</div>
+						<div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+						</li>
+						</ul>
+
 						';
 
     		}
@@ -329,7 +343,7 @@ $(document).ready(function(){
 
     <div class='card horizontal'>
       <div class='card-image'>
-        <img src= $row[5]>
+        <img width = '200px' height = '200px' src= $row[5]>
       </div>
       <div class='card-stacked'>
         <div class='card-content'>
@@ -370,6 +384,7 @@ $(document).ready(function(){
             </div>
             <div class='card-action'>
 
+
 							<a id = 'like' style='color: #b60046;' >Like (".$num[0].")</a>
 							<a onclick='func$row[0]()'class = 'right' style='cursor:pointer; color: #b60046;' >$safehashtag </a>
 
@@ -404,16 +419,30 @@ $(document).ready(function(){
 			$web = mysqli_real_escape_string($connection, $_POST['web']);
 
 			// check to see if user has entered anything
-			if ($bio != "" || $pimg != "" || $web != "") {
+			if ($bio != "") {
 			// build SQL query
 
 
-			$query = "UPDATE users SET bio = '$bio', profile = '$pimg',web = '$web' WHERE username = '$safeuser';";
+			$query = "UPDATE users SET bio = '$bio' WHERE username = '$safeuser';";
 			// run the query
 				$result = mysqli_query($connection,$query) or die ("Error in query: $query. ".mysql_error());
 			// refresh the page to show new update
 			echo "<meta http-equiv='refresh' content='0'>";
 
+			}
+			if ($pimg != ""){
+				$query = "UPDATE users SET profile = '$pimg' WHERE username = '$safeuser';";
+				// run the query
+					$result = mysqli_query($connection,$query) or die ("Error in query: $query. ".mysql_error());
+				// refresh the page to show new update
+				echo "<meta http-equiv='refresh' content='0'>";
+			}
+			if ($web != ""){
+				$query = "UPDATE users SET web = '$web' WHERE username = '$safeuser';";
+				// run the query
+					$result = mysqli_query($connection,$query) or die ("Error in query: $query. ".mysql_error());
+				// refresh the page to show new update
+				echo "<meta http-equiv='refresh' content='0'>";
 			}
  		// if DELETE pressed, set an id, if id is set then delete it from DB
  		if (isset($_GET['id'])) {
@@ -534,19 +563,29 @@ $(document).ready(function(){
     					<div class="determinate" style="width: 100%"></div>
   				</div>
 				</li>
+				<li class = "collection-item"> Profile <br>
+					<div class="progress">
+    					<div class="determinate" style="width: 90%"></div>
+  				</div>
+				</li>
+				<li class = "collection-item"> <br>
+					<div class="progress">
+    					<div class="determinate" style="width: 90%"></div>
+  				</div>
+				</li>
 				<li class = "collection-item"> Like button: <br>
 					<div class="progress">
-    					<div class="determinate" style="width: 10%"></div>
+    					<div class="determinate" style="width: 100%"></div>
   				</div>
 				</li>
 				<li class = "collection-item"> About Page: <br>
 					<div class="progress">
-    					<div class="determinate" style="width: 70%"></div>
+    					<div class="determinate" style="width: 80%"></div>
   				</div>
 				</li>
 				<li class = "collection-item"> Total Project: <br>
 					<div class="progress">
-    					<div class="determinate red" style="width: 60%"></div>
+    					<div class="determinate red" style="width: 70%"></div>
   				</div>
 				</li>
 			</ul>

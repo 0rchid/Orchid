@@ -2,7 +2,7 @@
 
     // These variables define the connection information for your MySQL database
     $username = "root";
-    $password = "orchidpass";
+    $password = "root";
     $host = "localhost";
     $dbname = "Orchid";
 
@@ -13,7 +13,7 @@
     // http://us2.php.net/manual/en/language.exceptions.php
     try
     {
-        // This statement opens a connection to your database using the PDO library 
+        // This statement opens a connection to your database using the PDO library
         // PDO is designed to provide a flexible interface between PHP and many
         // different types of database servers.  For more information on PDO:
         // http://us2.php.net/manual/en/class.pdo.php
