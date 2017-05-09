@@ -45,7 +45,7 @@
 
 <head>
   <!-- Compiled and minified CSS -->
-	 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
   <!-- Compiled and minified JavaScript -->
@@ -78,30 +78,6 @@ $(document).ready(function(){
 
 </head>
 	<body>
-		<div id="pmodal" class="modal">
-	    <div class="modal-content">
-	      <h4>Edit Profile</h4>
-				<form action="<?=$_SERVER['PHP_SELF']?>" method="post">
-
-					<div class = "input-field">
-		    		<input id = "img" class = "validate" type="text" name="img">
-						<label for = "img">Image Link<label>
-					</div>
-					<div class = "input-field">
-						<input id = "bio" class = "validate" type="text" name="bio">
-						<label for = "Bio">Bio<label>
-					</div>
-					<div class = "input-field">
-						<input id = "web" class = "validate" type="text" name="web">
-						<label for = "web">Website<label>
-					</div>
-
-	    </div>
-	    <div class="modal-footer">
-	      <button class = "btn waves-effect waves-light green " style="background-color: #1b9596;">Post</button>
-	    </div>
-			</form>
-	  </div>
 		<div class = "navbar-fixed">
 		<nav class = "nav-extended">
 	    <div class="nav-wrapper" style="background-color: #ff3498;">
@@ -303,49 +279,12 @@ $(document).ready(function(){
  		// select database
  		mysqli_select_db($connection, $dbname) or die ("Unable to select database!");
  		// create query
-
 		$user = $arr[1];
-		$query = "SELECT * FROM users WHERE username = '$user' ";
-		$result = mysqli_query($connection,$query);
-		$row = mysqli_fetch_row($result);
-			//echo $row[6];
-
-
  		$query = "SELECT * FROM posts WHERE user = '$arr[1]' ORDER BY id DESC";
 
  		// execute query
  		$result = mysqli_query($connection,$query) or die ("Error in query: $query. ".mysql_error());
 
-
-
-
-
-	//	echo $row['profile'];
-		//echo $row['bio'];
-
-		echo "
-
-		<div class='col s12 m7'>
-
-    <div class='card horizontal'>
-      <div class='card-image'>
-        <img src= $row[5]>
-      </div>
-      <div class='card-stacked'>
-        <div class='card-content'>
-				<a href = '#pmodal' class='right btn-floating btn waves-effect waves-light red'>
- 					<i class='large material-icons'>mode_edit</i>
-				</a>
-          <p>$row[6]</p>
-        </div>
-        <div class='card-action'>
-          <a href='$row[7]'>My Website</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-			";
 
  		// see if any rows were returned
  		if (mysqli_num_rows($result) > 0) {
@@ -399,22 +338,8 @@ $(document).ready(function(){
  		// free result set memory
  		mysqli_free_result($connection,$result);
  		// set variable values to HTML form inputs
-     	$bio = mysqli_real_escape_string($connection, $_POST['bio']);
-			$pimg = mysqli_real_escape_string($connection, $_POST['img']);
-			$web = mysqli_real_escape_string($connection, $_POST['web']);
+     	$content = mysqli_real_escape_string($connection, $_POST['content']);
 
-			// check to see if user has entered anything
-			if ($bio != "" || $pimg != "" || $web != "") {
-			// build SQL query
-
-
-			$query = "UPDATE users SET bio = '$bio', profile = '$pimg',web = '$web' WHERE username = '$safeuser';";
-			// run the query
-				$result = mysqli_query($connection,$query) or die ("Error in query: $query. ".mysql_error());
-			// refresh the page to show new update
-			echo "<meta http-equiv='refresh' content='0'>";
-
-			}
  		// if DELETE pressed, set an id, if id is set then delete it from DB
  		if (isset($_GET['id'])) {
  			// create query to delete record
