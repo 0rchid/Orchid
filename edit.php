@@ -31,14 +31,13 @@
 
 	// select database
 	mysqli_select_db($connection, $dbname) or die ("Unable to select database!");
-	$query = "SELECT COUNT(*) c FROM posts WHERE user = 'Andy'";
+	$query = "SELECT COUNT(*) c FROM posts WHERE user = '$arr[1]'";
 
 	$result = mysqli_query($connection,$query);
 	$row = mysqli_fetch_assoc($result);
 	 //Here is your count
 
 	// execute query
-
 
 
 ?>
@@ -475,12 +474,16 @@ $(document).ready(function(){
 	          <ul class="section table-of-contents">
 	            <li><a href="#materialdesign">Orchid</a></li>
 	            <li><a href="#team">Meet the Team</a></li>
+							<li><a href="#github">Github</a></li>
 	          </ul>
 	        </div>
 	      </div>
 	    </div>
 
       <div id="materialdesign" class="section scrollspy">
+				<br>
+				<br>
+				<br>
 						<h2 style = " color : #009688" class = "header">	Orchid Media</h2>
 						<p class = "caption">
         		Orchid is a baseline social media, created by two students at Upper Canada College for a ICS4U project.
@@ -510,6 +513,10 @@ $(document).ready(function(){
 
       <!--  About the Team-->
       <div id="team" class="section scrollspy">
+
+				<br>
+				<br>
+				<br>
         <div class="row">
           <h2 class="header" style = " color : #009688">Meet the Team</h2>
           <p class="caption">We are a team of students from Upper Canada College</p>
@@ -542,6 +549,10 @@ $(document).ready(function(){
             <p></p>
           </div>
         </div>
+				<div id = "github" class ="section scrollspy">
+				<br>
+				<br>
+				<br>
 				<div class="row">
           <a href = "https://github.com/0rchid"><h2 style = " color : #009688" class="header">Github</h2></a>
           <b>We are using Github to edit the php pages</b>
@@ -568,11 +579,7 @@ $(document).ready(function(){
     					<div class="determinate" style="width: 90%"></div>
   				</div>
 				</li>
-				<li class = "collection-item"> <br>
-					<div class="progress">
-    					<div class="determinate" style="width: 90%"></div>
-  				</div>
-				</li>
+
 				<li class = "collection-item"> Like button: <br>
 					<div class="progress">
     					<div class="determinate" style="width: 100%"></div>
@@ -585,10 +592,11 @@ $(document).ready(function(){
 				</li>
 				<li class = "collection-item"> Total Project: <br>
 					<div class="progress">
-    					<div class="determinate red" style="width: 70%"></div>
+    					<div class="determinate red" style="width: 85%"></div>
   				</div>
 				</li>
 			</ul>
+		</div>
 
 
 
@@ -603,6 +611,30 @@ $(document).ready(function(){
 <section id = "help">
 	Nothing Yet :(
 </section>
+<footer class="page-footer" style = "background-color:#ff3498">
+				 <div class="container">
+					 <div class="row">
+						 <div class="col l6 s12">
+							 <h5 class="white-text">Footer Content</h5>
+							 <p class="grey-text text-lighten-4">Orchid Media uses Materialize css with a base php derived from a work by Mark Hoel.</p>
+						 </div>
+						 <div class="col l4 offset-l2 s12">
+							 <h5 class="white-text">Sources</h5>
+							 <ul>
+								 <li><a class="grey-text text-lighten-3" href="https://github.com/0rchid/Orchid">Github Repository</a></li>
+								 <li><a class="grey-text text-lighten-3" href="https://github.com/0rchid">Github Organization</a></li>
+								 <li><a class="grey-text text-lighten-3" href="http://materializecss.com/">Materialize Css</a></li>
+								 <li><a class="grey-text text-lighten-3" href="https://script.google.com/a/macros/ucc.on.ca/s/AKfycbxBv7vZKj5k_kADOE8JqnPffSwE8hPVljxR6Yr4P_cCMbcO2MM/exec?cid=0B-67aGL87ij3c1ZvZm5tRXNBVkk&json=0B-67aGL87ij3c1ZvZm5tRXNBVkk&id=outline">ICS4U</a></li>
+							 </ul>
+						 </div>
+					 </div>
+				 </div>
+				 <div class="footer-copyright">
+					 <div class="container">
+					 © 2017 All rights reserved | Orchid Group Ltd.
+					 </div>
+				 </div>
+			 </footer>
  </div>
 	</body>
 </html>
