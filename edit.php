@@ -258,12 +258,35 @@ $(document).ready(function(){
 						</div>
 					</div>
 			</div>
-<i class = "fa fa-angle-down"></i><p>Comments</p>
+						<i class = "fa fa-angle-down"></i><p>Comments</p>
 						</div>
-						<div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+						<div class="collapsible-body">';
+
+						$currentcomms = "SELECT * FROM comments WHERE postid = $row[0]";
+						$commresult = mysqli_query($connection,$currentcomms) or die ("Error in query: $currentcomms. ".mysql_error());
+
+						if (mysqli_num_rows($commresult) > 0) {
+							while($commrow = mysqli_fetch_row($commresult)) {
+
+								echo'<p><b>'.htmlentities($commrow[2]).'</b>: '.htmlentities($commrow[3]).'</p>';
+							
+							}
+						}	else {
+							echo'<p>No Comments</p>';
+						}
+
+						echo'<div class="row">
+							<div class="input-field col s12">
+								<form action="'.$_SERVER['PHP_SELF'].'" method="post">
+									<div class = "input-field">
+	    						<input id = "comment" class = "validate" type="text" name="comment">
+									<label for = "comment">Comment<label>
+									<input id = "pid" name = "pid" type = "hidden" value = "'.$row[0].'"
+									</div>
+								</form>
+						</div>
 						</li>
 						</ul>
-
 						';
 
     		}
@@ -271,21 +294,35 @@ $(document).ready(function(){
     		// print status message
     		echo "<script>Materialize.toast('Nothing matched your search!', 10000);</script>";
 		}
+
+		$comment = mysqli_real_escape_string($connection, $_POST['comment']);
+		$pid = mysqli_real_escape_string($connection, $_POST['pid']);
+
+		if ($comment != "") {
+	 		// build SQL query
+			$commquery = "INSERT INTO comments (postid, user, comment) VALUES ( '$pid', '$user', '$comment')";
+			// run the query
+     		$commresult = mysqli_query($connection,$commquery) or die ("Error in query: $commquery. ".mysql_error());
+			// refresh the page to show new update
+	 		echo "<meta http-equiv='refresh' content='0'>";
+
+		}
+
 		if (isset($_GET['postid'])) {
  			// create query to delete record
  			echo $_SERVER['PHP_SELF'];
      		$likeyquery = "INSERT INTO likes (postid, user) VALUES ('".$_GET['postid']."','".$sqluser."')";
  			// run the query
-      	$likey = mysqli_query($connection,$likeyquery) or die ("Error in query: $likeyquery. ".mysql_error());
+      	$likey = mysqli_query($connection,$likeyquery);
  			// reset the url to remove id $_GET variable
- 			$location = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
- 			echo '<META HTTP-EQUIV="refresh" CONTENT="0;URL='.$location.'">';
+ 			$likelocation = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
+ 			echo '<META HTTP-EQUIV="refresh" CONTENT="0;URL='.$likelocation.'">';
  			exit;
  		}
 		// free result set memory
 		mysqli_free_result($connection,$result);
 		// set variable values to HTML form inputs
-    	$content = mysqli_real_escape_string($connection, $_POST['content']);
+    $content = mysqli_real_escape_string($connection, $_POST['content']);
 
 		// check to see if user has entered anything
 		if ($content != "") {
