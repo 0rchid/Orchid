@@ -257,8 +257,14 @@ $(document).ready(function(){
 							</div>
 						</div>
 					</div>
-			</div>
-						<i class = "fa fa-angle-down"></i><p>Comments</p>
+			</div>';
+						
+						$numcommsquery = "SELECT COUNT(commentid) FROM comments WHERE postid = $row[0]";
+						$numcomms = mysqli_query($connection,$numcommsquery);
+						$numco = mysqli_fetch_row($numcomms); 	
+						
+						echo'
+						<i class = "fa fa-angle-down"></i><p>Comments ('.$numco[0].')</p>
 						</div>
 						<div class="collapsible-body">';
 
