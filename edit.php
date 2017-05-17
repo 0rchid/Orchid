@@ -222,13 +222,28 @@ $(document).ready(function(){
 					$num = mysqli_fetch_row($numlikes);
 					//$numlikes=5;
 					if ($_POST['like'.$row[0]]){
-							echo"<script>alert('test')</script>";
    						$likequery = "INSERT INTO likes (postid, user) VALUES ('$row[0]', '$safeuser')";
    						$likerun = mysql_query($connection,$likequery);
 						}
 					$safecontent = htmlentities($row[3]);
 					$safehashtag = htmlentities($row[2]);
 					$safeuser = htmlentities($row[1]);
+					
+					$currentprofilequery = "SELECT * FROM users WHERE username = '$row[1]'";
+					$currentprofileresult = mysqli_query($connection,$currentprofilequery);
+					$pro = mysqli_fetch_row($currentprofileresult);
+
+					$safebio = htmlentities($pro[6]);
+					$safelink = htmlentities($pro[5]);
+					$safeweb = htmlentities($pro[7]);
+
+					if ($safelink == "") {
+						$safelink = "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png";
+					}
+
+					if ($safebio == "") {
+						$safebio = "[Bio not set]";
+					}
 					
 					echo"<script>
 					function func$row[0]() {
@@ -244,7 +259,7 @@ $(document).ready(function(){
 	        <div class="col s12 m12">
 	          <div class="card darken-3"style="background-color: #7be6b4" >
 	            <div class="card-content text">
-	              <a class="card-title" href="#model1" 	style = "font-weight: 400; color : #b60046;">';echo"$safeuser"; echo'</a>
+	              <a class="card-title" style="font-weight: 400; color : #b60046;" data-target="profilemodal'.$row[0].'">';echo"$safeuser"; echo'<img style="border: 0.05vw solid black;" align="right" width = "50px" height = "50px" src='.$safelink.'></a>
 	              <p>'; echo"$safecontent"; echo'</p>
 	            </div>
 	            <div class="card-action">
@@ -259,6 +274,27 @@ $(document).ready(function(){
 						</div>
 					</div>
 			</div>';
+			echo'
+				<div id="profilemodal'.$row[0].'" class="modal">
+    			<div class="modal-content">'."
+      			<div class='card horizontal'>
+      				<div class='card-image'>
+        			<img width = '200px' height = '200px' src=".$safelink.">
+      				</div>
+      				<div class='card-stacked'>
+       			 	<div class='card-content'>
+          			<p>".$safebio."</p>
+        			</div>
+        				<div class='card-action'>
+          				<a href='$safeweb'>Favourite Link</a>
+        				</div>
+      				</div>
+    				</div>
+    			</div>".'
+    			<div class="modal-footer">
+      			<button class = "btn waves-effect waves-light green modal-close" style="background-color: #1b9596;">Close</button>
+    			</div>
+  			</div>';
 
 						$numcommsquery = "SELECT COUNT(commentid) FROM comments WHERE postid = $row[0]";
 						$numcomms = mysqli_query($connection,$numcommsquery);
@@ -703,7 +739,7 @@ $(document).ready(function(){
 	 Senior Front-End Developper
 	 <a href = "mailto:andy.craig@ucc.on.ca" class="secondary-content">andy.craig@ucc.on.ca </a>
  </li>
-</ul>
+	</ul>
 		<form action="https://formspree.io/andy.craig@ucc.on.ca" method="post">
 			<div>
 				<div class="row">
