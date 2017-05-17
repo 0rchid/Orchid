@@ -157,7 +157,7 @@ $(document).ready(function(){
 	<br>
 	<br>
 	<div class = "container">
-		<section id = "home">
+<section id = "home">
 
 			<div class="row">
     		<form id="hashform" action="<?=$_SERVER['PHP_SELF']?>" method="post" class="">
@@ -229,6 +229,7 @@ $(document).ready(function(){
 					$safecontent = htmlentities($row[3]);
 					$safehashtag = htmlentities($row[2]);
 					$safeuser = htmlentities($row[1]);
+					
 					echo"<script>
 					function func$row[0]() {
 					document.getElementById('hashform').elements[0].value = '$safehashtag';
@@ -243,7 +244,7 @@ $(document).ready(function(){
 	        <div class="col s12 m12">
 	          <div class="card darken-3"style="background-color: #7be6b4" >
 	            <div class="card-content text">
-	              <span class="card-title" style = "font-weight: 400; color : #b60046;">';echo"$safeuser"; echo'</span>
+	              <a class="card-title" href="#model1" 	style = "font-weight: 400; color : #b60046;">';echo"$safeuser"; echo'</a>
 	              <p>'; echo"$safecontent"; echo'</p>
 	            </div>
 	            <div class="card-action">
@@ -294,6 +295,7 @@ $(document).ready(function(){
 						</li>
 						</ul>
 						';
+		
 
     		}
 		} else {
@@ -351,7 +353,7 @@ $(document).ready(function(){
 
 
  </section>
- <section id = "profile">
+<section id = "profile">
 	 <?php
  		// open connection
  		$connection = mysqli_connect($host, $username, $password) or die ("Unable to connect!");
@@ -502,7 +504,7 @@ $(document).ready(function(){
  		mysqli_close($connection);
  	?>
   	<!-- This is the HTML form that appears in the browser -->
-</section>
+	</section>
 <section id = "about">
 
 
@@ -648,12 +650,12 @@ $(document).ready(function(){
 
 
   </div>
-</div> <!-- End Container -->
-</div>
-</section>
+	</div> <!-- End Container -->
+	</div>
+	</section>
 <section id = "help">
 	Nothing Yet :(
-</section>
+	</section>
 <footer class="page-footer" style = "background-color:#ff3498">
 				 <div class="container">
 					 <div class="row">
