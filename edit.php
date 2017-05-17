@@ -259,11 +259,11 @@ $(document).ready(function(){
 						</div>
 					</div>
 			</div>';
-						
+
 						$numcommsquery = "SELECT COUNT(commentid) FROM comments WHERE postid = $row[0]";
 						$numcomms = mysqli_query($connection,$numcommsquery);
-						$numco = mysqli_fetch_row($numcomms); 	
-						
+						$numco = mysqli_fetch_row($numcomms);
+
 						echo'
 						<i class = "fa fa-angle-down"></i><p>Comments ('.$numco[0].')</p>
 						</div>
@@ -276,7 +276,7 @@ $(document).ready(function(){
 							while($commrow = mysqli_fetch_row($commresult)) {
 
 								echo'<p><b>'.htmlentities($commrow[2]).'</b>: '.htmlentities($commrow[3]).'</p>';
-							
+
 							}
 						}	else {
 							echo'<p>No Comments</p>';
@@ -654,7 +654,76 @@ $(document).ready(function(){
 	</div>
 	</section>
 <section id = "help">
-	Nothing Yet :(
+	<div class = "container">
+	<h2 style = "color: #009688;"> FAQ</h2>
+	<ul class="collapsible" data-collapsible="accordion">
+    <li>
+      <div class="collapsible-header"><i class="fa fa-question-circle"></i> Is this site secure?</div>
+      <div class="collapsible-body"><span>We use 2nd degree encryption on our password database and usename database to make sure that none of your precious information is leaked. We also provide strong security on hacking through injections that use htmlentities</span></div>
+    </li>
+		<li>
+      <div class="collapsible-header"><i class="fa fa-question-circle"></i> Is there a way to like other people's posts. ?</div>
+      <div class="collapsible-body"><span>On the other people's posts, there is a like button as well as a counter to see how many likes you have. We limit each person to liking once on each post so you can't get a million likes. </span></div>
+    </li>
+		<li>
+      <div class="collapsible-header"><i class="fa fa-question-circle"></i> Is there a way that I can comment on other people's posts</div>
+      <div class="collapsible-body"><span>Yes, all you have to do it click on the white part around the post and a little drop down opens with all the comments.</span></div>
+    </li>
+    <li>
+			<div class="collapsible-header"><i class="fa fa-question-circle"></i> How can I post?</div>
+			<div class="collapsible-body"><span>See that giant green button in the top left? That is how you post.</span></div>
+		</li>
+		<li>
+			<div class="collapsible-header"><i class="fa fa-question-circle"></i> Can I search for hashtags without typing in the whole search?</div>
+			<div class="collapsible-body"><span>Yes, if you click on any hashtag, it will search the database for any that are alike. </span></div>
+		</li>
+
+  </ul>
+	<h2 style = "color : #009688;"> Troubleshooting</h2>
+
+		Before  contacting us, have you tried restarting your browser and reloading the page. If you have not, first press : command + shift + R then try the issue. If this does not work, reboot your browser and/or your computer.
+		Next step is to log out and log back in again. Re-enter your login information then enter. If the problem persists please contact us below.
+		<h2 style = "color : #009688;"> Contact the team </h2>
+		<ul class="collection">
+	 <li class="collection-item avatar">
+		 <img src="doug.png" alt="" class="circle">
+		 <span class="title">Douglas Byers</span>
+		 <br>
+
+		<p style " text-indent: 50px;"> Senior Back-End Developper</p>
+
+		 <a class = "secondary-content" href = "mailto:douglas.byers@ucc.on.ca"> douglas.byers@ucc.on.ca</a>
+	 </li>
+
+ <li class="collection-item avatar">
+	 <img src="andy.png" alt="" class="circle">
+	 <span class="title">Andy Craig</span>
+	 <br>
+	 
+	 Senior Front-End Developper
+	 <a href = "mailto:andy.craig@ucc.on.ca" class="secondary-content">andy.craig@ucc.on.ca </a>
+ </li>
+</ul>
+		<form action="https://formspree.io/andy.craig@ucc.on.ca" method="post">
+			<div>
+				<div class="row">
+					<div class="input-field">
+						<input type="text" name="_replyto" placeholder="Email" />
+					</div>
+					<div class="input-field">
+						<input type="text" name="problem" placeholder="Subject" />
+					</div>
+
+					<div class="input-field">
+						<textarea name="text" class = "materialize-textarea"placeholder="Message" rows="8"></textarea>
+					</div>
+					<div class="input-field">
+						<input class = "btn purple"type="submit" value="Send Message" />
+					</div>
+				</div>
+			</div>
+		</form>
+	<div>
 	</section>
 <footer class="page-footer" style = "background-color:#ff3498">
 				 <div class="container">
