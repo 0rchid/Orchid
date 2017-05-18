@@ -628,7 +628,7 @@ $(document).ready(function(){
         <div class="row">
           <div class="col s12 m3 center-on-small-only">
             <div class="image-container">
-              <img class = "saturate" style = "border-radius: 50%; "width = "200px" height = "200px" src="doug.png">
+              <img style = "border-radius: 50%; "width = "200px" height = "200px" src="doug.png">
             </div>
           </div>
           <div class="col s12 m9">
