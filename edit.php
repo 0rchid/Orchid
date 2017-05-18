@@ -160,27 +160,28 @@ $(document).ready(function(){
 <section id = "home">
 
 			<div class="row">
-    		<form id="hashform" action="<?=$_SERVER['PHP_SELF']?>" method="post" class="">
-      		<div class="row">
+    		
+					<form id="hashform" action="<?=$_SERVER['PHP_SELF']?>" method="post" class="">
         		<div class="input-field col s6">
 							<input id = "hashtagsearch" class = "validate" type="text" name="hashtagsearch">
 							<label for = "hashtagsearch">Search Hashtags<label>
-        	</div>
+        		</div>
 					</form>
-				<form id="userform" action="<?=$_SERVER['PHP_SELF']?>" method="post" class="">
-        <div class="input-field col s6">
-					<input id = "usersearch" class = "validate" type="text" name="usersearch">
-					<label for = "usersearch">Search Users<label>
-        </div>
-				</form>
-      </div>
-
-  </div>
+					
+					<form id="userform" action="<?=$_SERVER['PHP_SELF']?>" method="post" class="">
+        		<div class="input-field col s6 right">
+							<input id = "usersearch" class = "validate" type="text" name="usersearch">
+							<label for = "usersearch">Search Users<label>
+        		</div>
+					</form>
+  		</div>
 
 
 
 	<?php
+		$resetsearch = false;
 		// open connection
+
 		$connection = mysqli_connect($host, $username, $password) or die ("Unable to connect!");
 
 		// select database
@@ -203,6 +204,8 @@ $(document).ready(function(){
 			$query = "SELECT * FROM posts WHERE hashtag LIKE '%$hashtagsearch%' ORDER BY id DESC";
 			// run the query
      	$result = mysqli_query($connection,$query) or die ("Error in query: $query. ".mysql_error());
+			
+			$resetsearch = true;
 		}
 
 		$usersearch = mysqli_real_escape_string($connection, $_POST['usersearch']);
@@ -212,7 +215,14 @@ $(document).ready(function(){
 			$query = "SELECT * FROM posts WHERE user LIKE '%$usersearch%' ORDER BY id DESC";
 			// run the query
      	$result = mysqli_query($connection,$query) or die ("Error in query: $query. ".mysql_error());
+			
+			$resetsearch = true;
 		}
+		if ($resetsearch) {
+		echo'<center><a class="btn" style="margin-bottom:2vw; background-color: #7be6b4; color: #b60046;" href="edit.php">Reset Search</a></center>';
+
+		}
+
 		// see if any rows were returned
 		if (mysqli_num_rows($result) > 0) {
     		// print them one after another
@@ -246,6 +256,12 @@ $(document).ready(function(){
 					}
 					
 					echo"<script>
+					
+					function profunc$row[0]() {
+					document.getElementById('userform').elements[0].value = '$safeuser';
+					document.getElementById('userform').submit();
+					}
+
 					function func$row[0]() {
 					document.getElementById('hashform').elements[0].value = '$safehashtag';
 					document.getElementById('hashform').submit();
@@ -279,10 +295,11 @@ $(document).ready(function(){
     			<div class="modal-content">'."
       			<div class='card horizontal'>
       				<div class='card-image'>
-        			<img width = '200px' height = '200px' src=".$safelink.">
+        			<img width = '215px' height = '215px' src=".$safelink.">
       				</div>
       				<div class='card-stacked'>
        			 	<div class='card-content'>
+								<a class='card-title' style='font-weight: 400; color : #b60046;'>".$safeuser."'s profile</a>
           			<p>".$safebio."</p>
         			</div>
         				<div class='card-action'>
@@ -292,7 +309,8 @@ $(document).ready(function(){
     				</div>
     			</div>".'
     			<div class="modal-footer">
-      			<button class = "btn waves-effect waves-light green modal-close" style="background-color: #1b9596;">Close</button>
+      			<button style="background-color: #b60046;" class="btn modal-action modal-close waves-effect waves-light">Close</button>
+						<button onclick="profunc'.$row[0].'()"style="margin-right:1vw;background-color: #7be6b4; color: #b60046;" class="btn modal-action modal-close waves-effect waves-light" >'.$safeuser.'\'s posts</button>
     			</div>
   			</div>';
 
